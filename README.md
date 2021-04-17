@@ -4,3 +4,4 @@
  - Fardoux Benoit
  - Lemattre Baptiste
  - Sin Victor
+## Responsable du groupe : Lemattre baptiste
