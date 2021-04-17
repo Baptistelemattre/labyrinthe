@@ -1,5 +1,5 @@
 # Projet Tutoré
-## Membre de l'équipe "Brocodeur" 
+## Membre de l'équipe "Bricodeur" 
  - Erfani Habib
  - Fardoux Benoit
  - Lemattre Baptiste
