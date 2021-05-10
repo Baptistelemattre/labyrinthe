@@ -50,7 +50,7 @@ abstract public class Piece {
 	public void rotation(){
 		if (orientationPiece !=3) {
 			orientationPiece++;
-		}else if (orientationPiece == 3)orientationPiece = 0;
+		}else orientationPiece = 0;
 		modifierEntree();
 	}
 
@@ -61,8 +61,7 @@ abstract public class Piece {
 	 * @param orientationPiece Un entier correspondant Ã  la nouvelle orientation de la piÃ¨ce.
 	 */
 	public void setOrientation(int orientationPiece){
-		this.orientationPiece = orientationPiece;
-		for (int i = this.getOrientationPiece();i<orientationPiece;i++)rotation();
+		while (this.orientationPiece != orientationPiece)rotation();
 	}
 
 	private void modifierEntree() {

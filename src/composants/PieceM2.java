@@ -22,7 +22,8 @@ public class PieceM2 extends Piece {
 	 * @return Une copie de la pièce.
 	 */
 	public Piece copy(){
-		Piece piece=new PieceM2();
+		Piece piece= new PieceM2();
+		piece.setPointsEntree(this.getPointEntree(0), this.getPointEntree(1), this.getPointEntree(2), this.getPointEntree(3));
 		return piece;
 	}
 }
