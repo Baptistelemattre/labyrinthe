@@ -17,7 +17,7 @@ public class PieceM0 extends Piece {
 		super(0,false,true,true,false); 
 	}
 	/**
-	 * Faite le 28/04/2021 par baptiste lemattre
+	 * Faite le 28/04/2021 par fardoux benoit
 	 * 
 	 * Méthode permettant de créer une copie de la pièce (un nouvelle objet Java).
 	 * @return Une copie de la pièce.

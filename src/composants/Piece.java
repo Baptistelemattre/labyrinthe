@@ -51,7 +51,7 @@ abstract public class Piece {
 		if (orientationPiece !=3) {
 			orientationPiece++;
 		}else if (orientationPiece == 3)orientationPiece = 0;
-		
+		modifierEntree();
 	}
 	
 	/**
@@ -63,7 +63,14 @@ abstract public class Piece {
 	public void setOrientation(int orientationPiece){
 		this.orientationPiece = orientationPiece; 
 	}
-
+	
+	private void modifierEntree() {
+		boolean temp[] = pointsEntree;
+		pointsEntree[0] = temp[3];
+		pointsEntree[1] = temp[0];
+		pointsEntree[2] = temp[1];
+		pointsEntree[3] = temp[2] ;
+	}
 	/**
 	 * Faite le 28/04/2021 par fardoux benoit
 	 * 
@@ -86,7 +93,7 @@ abstract public class Piece {
 	}
 
 	/**
-	 * Faite le 05/05/2021 par baptiste lemattre
+	 * Faite le 28/04/2021 par fardoux benoit
 	 * 
 	 * M√©thode indiquant si il existe un point d'entr√©e √† une certaine position (0: en haut, 1: √† droite, 2: en bas, 3: √† gauche).
 	 * @param pointEntree L'indice/la position du point d'entr√©e.
@@ -97,7 +104,7 @@ abstract public class Piece {
 	}
 	
 	/**
-	 * faite le 05/05/2021 par baptiste lemattre
+	 * 
 	 * 
 	 * M√©thode permettant de cr√©er un tableau contenant toutes les pi√®ces du jeu (les 50 pi√®ces).
 	 * Le tableau contiendra 20 pi√®ces du mod√®le 0, 12 pi√®ces du mod√®le 1 et 18 pi√®ces du mod√®le 2.
@@ -106,64 +113,13 @@ abstract public class Piece {
 	 */
 	public static Piece[] nouvellesPieces(){
 		Piece pieces[]= null;
-		Piece[] pieces = new Piece[50]; //CrÈer un tableau de 50 piËces.
-	    //DÈfinit les constantes, le nombre de piËces maximum pour chaque modËle.  
-	        final int maxM0 = 20;
-	        final int maxM1 = 12;
-	        final int maxM2 = 18;
-	    //Les compteurs pour les piËces de modËle respectifs.
-	        int nombreM0 = 0;
-	        int nombreM1 = 0;
-	        int nombreM2 = 0;
-	        boolean isAdded = false;
-
-	        for (int i = 0; i < pieces.length; i++){
-	            int choixModele;
-	            do{ // VÈrification si le nombre de piËce du modËle choisi n'est pas atteint.
-	                choixModele = (int)(Math.random()*3);
-	                if(choixModele == 0 && countM0 != maxM0){
-	                    isAdded = true;
-	                }
-	                else if (choixModele == 1 && countM1 != maxM1){
-	                    isAdded = true;
-	                }
-	                else if (choixModele == 2 && countM2 != maxM2){
-	                    isAdded = true;
-	                }
-	            }while(!isAdded);
-	            
-	            //Ajoute et fait la rotation ‡ l'index choisi.
-	            if (choixModele == 0 && countM0 < maxM0){
-	                Piece.addPieceAndRotation(pieces, new PieceM0(), i, countM0);
-	            }
-	            else if (choixModele == 1 && countM1 < maxM1){
-	                Piece.addPieceAndRotation(pieces, new PieceM1(), i, countM1);
-	            }
-	            else if (choixModele == 2 && countM2 < maxM2){
-	                Piece.addPieceAndRotation(pieces, new PieceM2(), i, countM2);
-	            }
-	        }
+		// A Compl√©ter (A Faire apr√®s les classes PieceM0, PieceM1 et PieceM2)
 		return pieces;
 	}
-    /**
-    MÈthode privÈe permettant d'ajouter ‡ l'index d'un tableau une piËce qu'importe son modËle
-    ,cette derniËre obtiendra une orientation alÈatoire entre 0 et 3 puis elle incrÈmente le compteur 
-    associÈ.
-
-    @param tabPiece correspond au tableau de l'interface, piece c'est le modËle de piece choisi
-    index c'est l'index actuelle o˘ on se situe dans tabPiece, counter le compteur actuelle de la piËce choisi
-    @return void.
-    */
-    private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index,int counter){
-        counter++;
-        int choixOrientation;
-        choixOrientation = (int)(Math.random()*4);
-        piece.setOrientation(0);
-        tabPiece[index] = piece; 
-    }
+	
 	/**
 	 * M√©thode permettant de cr√©er une copie de la pi√®ce (un nouvelle objet Java).
 	 * @return Une copie de la pi√®ce.
 	 */
-	public abstract Piece copy;
+	public abstract Piece copy();
 }
