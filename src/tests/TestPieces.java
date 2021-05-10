@@ -19,13 +19,13 @@ public class TestPieces{
 		IG.afficherMessage(message); 
 		IG.miseAJourAffichage(); 
 		IG.attendreClic();  
-        Piece[] Tableau = Piece.nouvellesPieces();
+        Piece[] tableau = Piece.nouvellesPieces();
 
 		int pos = 0;
-        IG.changerPieceHorsPlateau(Tableau[Tableau.lenght()].getModelePiece(), Tableau[Tableau.lenght()].getOrientationPiece());
+        IG.changerPieceHorsPlateau(tableau[tableau.length()].getModelePiece(), tableau[tableau.lenght()].getOrientationPiece());
 		for (int i = 0; i<7;i++){
 			for (int j = 0; j<7;j++){
-				IG.changerPiecePlateau(i,j,Tableau[pos].getModelePiece(),Tableau[pos].getOrientationPiece());
+				IG.changerPiecePlateau(i,j,tableau[pos].getModelePiece(),tableau[pos].getOrientationPiece());
 				pos ++;
 			}
 		}
@@ -34,20 +34,20 @@ public class TestPieces{
 
 		for (int i=0; i<4; i++){
 			IG.attendreClic();
-			for(int j=0; j<Tableau.lenght()-2;j++){
-				Tableau[j].rotation();
-				System.out.println(Tableau[j].toString());
+			for(int j=0; j<tableau.lenght()-2;j++){
+				tableau[j].rotation();
+				System.out.println(tableau[j].toString());
 			}
 			pos = 0;
-			for (int n = 0; i<7;i++){
+			for (int n = 0; n<7;n++){
 				for (int j = 0; j<7;j++){
-					IG.changerPiecePlateau(n,j,Tableau[pos].getModelePiece(),Tableau[pos].getOrientationPiece());
+					IG.changerPiecePlateau(n,j,tableau[pos].getModelePiece(),tableau[pos].getOrientationPiece());
 					pos ++;
 				}
 			}
-		    IG.changerPieceHorsPlateau(Tableau[Tableau.lenght()].getModelePiece(), Tableau[Tableau.lenght()].getOrientationPiece());
+		    IG.changerPieceHorsPlateau(tableau[tableau.lenght()].getModelePiece(), tableau[tableau.lenght()].getOrientationPiece());
 			IG.miseAJourAffichage();
-			System.out.println(Tableau[Tableau.lenght()-1].toString());
+			System.out.println(tableau[tableau.lenght()-1].toString());
 		}
         IG.attendreClic();
         IG.fermerFenetreJeu();
