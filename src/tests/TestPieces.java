@@ -1,5 +1,6 @@
 package tests;
 import grafix.interfaceGraphique.IG;
+import composants;
 
 public class TestPieces{
     public static void main(String[] args){
