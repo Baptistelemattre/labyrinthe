@@ -23,7 +23,7 @@ public class TestPieces{
         Piece[] tableau = Piece.nouvellesPieces();
 
 		int pos = 0;
-        IG.changerPieceHorsPlateau(tableau[tableau.length()].getModelePiece(), tableau[tableau.lenght()].getOrientationPiece());
+        IG.changerPieceHorsPlateau(tableau[tableau.length()-1].getModelePiece(), tableau[tableau.length()-1].getOrientationPiece());
 		for (int i = 0; i<7;i++){
 			for (int j = 0; j<7;j++){
 				IG.changerPiecePlateau(i,j,tableau[pos].getModelePiece(),tableau[pos].getOrientationPiece());
@@ -35,7 +35,7 @@ public class TestPieces{
 
 		for (int i=0; i<4; i++){
 			IG.attendreClic();
-			for(int j=0; j<tableau.lenght()-2;j++){
+			for(int j=0; j<tableau.length()-2;j++){
 				tableau[j].rotation();
 				System.out.println(tableau[j].toString());
 			}
@@ -46,9 +46,9 @@ public class TestPieces{
 					pos ++;
 				}
 			}
-		    IG.changerPieceHorsPlateau(tableau[tableau.lenght()].getModelePiece(), tableau[tableau.lenght()].getOrientationPiece());
+		    IG.changerPieceHorsPlateau(tableau[tableau.length()]-1.getModelePiece(), tableau[tableau.length()-1].getOrientationPiece());
 			IG.miseAJourAffichage();
-			System.out.println(tableau[tableau.lenght()-1].toString());
+			System.out.println(tableau[tableau.length()-1].toString());
 		}
         IG.attendreClic();
         IG.fermerFenetreJeu();
