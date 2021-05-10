@@ -46,7 +46,7 @@ public class TestPieces{
 					pos ++;
 				}
 			}
-		    IG.changerPieceHorsPlateau(tableau[tableau.length()]-1.getModelePiece(), tableau[tableau.length()-1].getOrientationPiece());
+		    IG.changerPieceHorsPlateau(tableau[tableau.length()].getModelePiece()-1, tableau[tableau.length()-1].getOrientationPiece());
 			IG.miseAJourAffichage();
 			System.out.println(tableau[tableau.length()-1].toString());
 		}
