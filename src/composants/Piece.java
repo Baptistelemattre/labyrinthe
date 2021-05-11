@@ -121,7 +121,7 @@ abstract public class Piece {
 	private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index,int counter){
 		counter++;
 		int choixOrientation;
-		choixOrientation = genererEntier(3);
+		choixOrientation = Utils.genererEntier(3);
 		piece.setOrientation(choixOrientation);
 		tabPiece[index] = piece;
 	}
@@ -145,7 +145,7 @@ abstract public class Piece {
 		for (int i = 0; i < pieces.length; i++){
 			//Ajoute et fait la rotation à l'index choisi.
 			if (countM0 < 20){
-				Piece.addPieceAndRotation(pieces, new PieceM0(), i, countM0);
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM0(), i, countM0);
 			}
 			else if (countM1 < 12){
 				Piece.addPieceAndRotation(pieces, new PieceM1(), i, countM1);
