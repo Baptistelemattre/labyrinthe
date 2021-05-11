@@ -148,12 +148,13 @@ abstract public class Piece {
 				Piece.addPieceAndRotationAndRotate(pieces, new PieceM0(), i, countM0);
 			}
 			else if (countM1 < 12){
-				Piece.addPieceAndRotation(pieces, new PieceM1(), i, countM1);
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM1(), i, countM1);
 			}
 			else if (countM2 < 18){
-				Piece.addPieceAndRotation(pieces, new PieceM2(), i, countM2);
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM2(), i, countM2);
 			}
 		}
+		return pieces;
 	}
 
 	/**
