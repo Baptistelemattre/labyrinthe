@@ -107,70 +107,53 @@ abstract public class Piece {
 	public boolean getPointEntree(int pointEntree){
 		return this.pointsEntree[pointEntree];
 	}
-	/*
-       Méthode privée permettant d'ajouter à l'index d'un tableau une pièce qu'importe son modèle
-       ,cette dernière obtiendra une orientation aléatoire entre 0 et 3 puis elle incrémente le compteur
-       associé.
-
-       @param tabPiece correspond au tableau de l'interface, piece c'est le modèle de piece choisi
-       index c'est l'index actuelle où on se situe dans tabPiece, counter le compteur actuelle de la pièce choisi
-       @return void.
-       */
+	/**
+	 *     Victor/Habib 10/05/2021
+	 *
+	 *    Méthode privée permettant d'ajouter à l'index d'un tableau une pièce qu'importe son modèle
+	 *    ,cette dernière obtiendra une orientation aléatoire entre 0 et 3 puis elle incrémente le compteur
+	 *    associé.
+	 *
+	 *    @param tabPiece correspond au tableau de l'interface, piece c'est le modèle de piece choisi
+	 *    index c'est l'index actuelle où on se situe dans tabPiece, counter le compteur actuelle de la pièce choisi
+	 *    @return void.
+	 */
 	private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index,int counter){
 		counter++;
 		int choixOrientation;
-		choixOrientation = (int)(Math.random()*4);
-		piece.setOrientation(0);
+		choixOrientation = genererEntier(3);
+		piece.setOrientation(choixOrientation);
 		tabPiece[index] = piece;
 	}
+
+
 	/**
+	 * A Faire (Quand Qui Statut) 10/05/2021 Victor/Habib Terminer
 	 *
-	 *
-	 * MÃ©thode permettant de crÃ©er un tableau contenant toutes les piÃ¨ces du jeu (les 50 piÃ¨ces).
-	 * Le tableau contiendra 20 piÃ¨ces du modÃ¨le 0, 12 piÃ¨ces du modÃ¨le 1 et 18 piÃ¨ces du modÃ¨le 2.
-	 * L'orientation de chaque piÃ¨ce sera alÃ©atoire.
-	 * @return Un tableau contenant toutes les piÃ¨ces du jeu.
+	 * Méthode permettant de créer un tableau contenant toutes les pièces du jeu (les 50 pièces).
+	 * Le tableau contiendra 20 pièces du modèle 0, 12 pièces du modèle 1 et 18 pièces du modèle 2.
+	 * L'orientation de chaque pièce sera aléatoire.
+	 * @return Un tableau contenant toutes les pièces du jeu.
 	 */
 	public static Piece[] nouvellesPieces(){
-		Piece pieces[]= null;
-		Piece[] pieces = new Piece[50]; //Cr�er un tableau de 50 pi�ces.
-		//D�finit les constantes, le nombre de pi�ces maximum pour chaque mod�le.
-		final int maxM0 = 20;
-		final int maxM1 = 12;
-		final int maxM2 = 18;
-		//Les compteurs pour les pi�ces de mod�le respectifs.
-		int nombreM0 = 0;
-		int nombreM1 = 0;
-		int nombreM2 = 0;
-		boolean isAdded = false;
+		Piece[] pieces = new Piece[50]; //Créer un tableau de 50 pièces.
+		//Les compteurs pour les pièces de modèle respectifs.
+		int countM0 = 0;
+		int countM1 = 0;
+		int countM2 = 0;
 
 		for (int i = 0; i < pieces.length; i++){
-			int choixModele;
-			do{ // V�rification si le nombre de pi�ce du mod�le choisi n'est pas atteint.
-				choixModele = (int)(Math.random()*3);
-				if(choixModele == 0 && countM0 != maxM0){
-					isAdded = true;
-				}
-				else if (choixModele == 1 && countM1 != maxM1){
-					isAdded = true;
-				}
-				else if (choixModele == 2 && countM2 != maxM2){
-					isAdded = true;
-				}
-			}while(!isAdded);
-
-			//Ajoute et fait la rotation � l'index choisi.
-			if (choixModele == 0 && countM0 < maxM0){
+			//Ajoute et fait la rotation à l'index choisi.
+			if (countM0 < 20){
 				Piece.addPieceAndRotation(pieces, new PieceM0(), i, countM0);
 			}
-			else if (choixModele == 1 && countM1 < maxM1){
+			else if (countM1 < 12){
 				Piece.addPieceAndRotation(pieces, new PieceM1(), i, countM1);
 			}
-			else if (choixModele == 2 && countM2 < maxM2){
+			else if (countM2 < 18){
 				Piece.addPieceAndRotation(pieces, new PieceM2(), i, countM2);
 			}
 		}
-		return pieces;
 	}
 
 	/**
