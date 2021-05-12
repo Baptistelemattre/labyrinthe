@@ -22,6 +22,9 @@ public class Objet {
 	 */
 	public Objet(int numObjet) {
 		// A Compléter
+		this.numObjet = numObjet;
+		this.posLignePlateau = -1;
+		this.posColonnePlateau = -1;
 	}
 
 	/**
@@ -64,7 +67,7 @@ public class Objet {
 	 * @return Le numéro de la ligne sur laquelle se trouve l'objet.
 	 */
 	public int getPosLignePlateau() {
-		return -1; // A Modifier
+		return posLignePlateau; // A Modifier
 	}
 
 	/**
@@ -76,7 +79,7 @@ public class Objet {
 	 * @return Le numéro de la colonne sur laquelle se trouve l'objet.
 	 */
 	public int getPosColonnePlateau() {
-		return -1; // A Modifier
+		return posColonnePlateau; // A Modifier
 	}
 	
 	
@@ -91,6 +94,8 @@ public class Objet {
 	 */
 	public void positionneObjet(int lignePlateau,int colonnePlateau){
 		// A Compléter
+		posLignePlateau = lignePlateau;
+		posColonnePlateau = colonnePlateau;
 	}
 
 	/**
@@ -102,6 +107,8 @@ public class Objet {
 	 */
 	public void enleveDuPlateau(){
 		// A Compléter
+		posColonnePlateau = -1;
+		posLignePlateau= -1;
 	}
 	
 	/**
@@ -113,6 +120,9 @@ public class Objet {
 	 * @return true si l'objet est sur le plateau, false sinon.
 	 */
 	public boolean surPlateau() {
+		if (posColonnePlateau==-1 && posLignePlateau == -1){
+			return true;
+		}
 		return false; // A Modifier
 	}
 
