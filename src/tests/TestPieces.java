@@ -1,9 +1,7 @@
 package tests;
 import grafix.interfaceGraphique.IG;
 import composants.Piece;
-import composants.PieceM0;
-import composants.PieceM1;
-import composants.PieceM2;
+
 
 public class TestPieces{
     public static void main(String[] args) {
