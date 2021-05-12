@@ -118,8 +118,7 @@ abstract public class Piece {
 	 *    index c'est l'index actuelle où on se situe dans tabPiece, counter le compteur actuelle de la pièce choisi
 	 *    @return void.
 	 */
-	private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index,int counter){
-		counter++;
+	private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index){
 		int choixOrientation;
 		choixOrientation = Utils.genererEntier(3);
 		piece.setOrientation(choixOrientation);
@@ -145,13 +144,16 @@ abstract public class Piece {
 		for (int i = 0; i < pieces.length; i++){
 			//Ajoute et fait la rotation à l'index choisi.
 			if (countM0 < 20){
-				Piece.addPieceAndRotationAndRotate(pieces, new PieceM0(), i, countM0);
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM0(), i);
+				countM0 ++;
 			}
-			else if (countM1 < 12){
-				Piece.addPieceAndRotationAndRotate(pieces, new PieceM1(), i, countM1);
+			else if (countM0 == 20 && countM1 < 12){
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM1(), i);
+				countM1++;
 			}
-			else if (countM2 < 18){
-				Piece.addPieceAndRotationAndRotate(pieces, new PieceM2(), i, countM2);
+			else if (countM0 == 20 && countM1 ==12 && countM2 < 18){
+				Piece.addPieceAndRotationAndRotate(pieces, new PieceM2(), i);
+				countM2++;
 			}
 		}
 		return pieces;
