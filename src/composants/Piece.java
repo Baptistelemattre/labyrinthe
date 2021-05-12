@@ -72,7 +72,7 @@ abstract public class Piece {
 		pointsEntree[3] = temp[2] ;
 	}
 	/**
-	 * Faite le 28/04/2021 par fardoux benoit
+	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
 	 *
 	 * MÃ©thode retournant le modÃ¨le de la piÃ¨ce.
 	 * @return Un entier corrspondant au modÃ¨le de la piÃ¨ce.
@@ -82,7 +82,7 @@ abstract public class Piece {
 	}
 
 	/**
-	 * Faite le 28/04/2021 par fardoux benoit
+	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
 	 *
 	 * MÃ©thode retournant l'orientation de la piÃ¨ce.
 	 * @return un entier retournant l'orientation de la piÃ¨ce.
@@ -98,7 +98,7 @@ abstract public class Piece {
 		this.pointsEntree[3] = pointEntreeGauche;
 	}
 	/**
-	 * Faite le 28/04/2021 par fardoux benoit
+	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
 	 *
 	 * MÃ©thode indiquant si il existe un point d'entrÃ©e Ã  une certaine position (0: en haut, 1: Ã  droite, 2: en bas, 3: Ã  gauche).
 	 * @param pointEntree L'indice/la position du point d'entrÃ©e.
