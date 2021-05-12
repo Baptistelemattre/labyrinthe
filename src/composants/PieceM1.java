@@ -8,7 +8,7 @@ package composants;
 public class PieceM1 extends Piece {
 
 	/**
-	 * Faite le 28/04/2021 par fardoux benoit
+	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
 	 * 
 	 * Constructeur permettant de construire une pièce de modèle 1 et d'orientation 0.
 	 */
@@ -16,7 +16,7 @@ public class PieceM1 extends Piece {
 		super(1,true,false,true,false); 
 	}
 	/**
-	 * Faite le 28/04/2021 par fardoux benoit
+	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
 	 * 
 	 * Méthode permettant de créer une copie de la pièce (un nouvelle objet Java).
 	 * @return Une copie de la pièce.
