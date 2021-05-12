@@ -146,12 +146,15 @@ abstract public class Piece {
 			//Ajoute et fait la rotation à l'index choisi.
 			if (countM0 < 20){
 				Piece.addPieceAndRotationAndRotate(pieces, new PieceM0(), i, countM0);
+				countM0++;
 			}
 			else if (countM1 < 12){
 				Piece.addPieceAndRotationAndRotate(pieces, new PieceM1(), i, countM1);
+				countM1++;
 			}
 			else if (countM2 < 18){
 				Piece.addPieceAndRotationAndRotate(pieces, new PieceM2(), i, countM2);
+				countM2++;
 			}
 		}
 		return pieces;
