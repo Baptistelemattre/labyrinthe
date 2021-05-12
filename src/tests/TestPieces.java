@@ -5,14 +5,14 @@ import composants.Piece;
 
 public class TestPieces{
     public static void main(String[] args) {
-		Object parametres[];
+		Object[] parametres;
 		parametres = IG.saisirParametres();
 
 		int nbJoueurs = ((Integer) parametres[0]).intValue();
 		IG.creerFenetreJeu("Bricodeurs de l'IUT de Lens", nbJoueurs);
 		IG.rendreVisibleFenetreJeu();
 
-		String message[] = {
+		String[] message = {
 				"",
 				"",
 				"Cliquer pour continuer ...",
@@ -35,6 +35,7 @@ public class TestPieces{
 
 
 		for (int i = 0; i < 4; i++) {
+			// condition toujours vraie
 			IG.attendreClic();
 			for (int j = 0; j < tableau.length - 2; j++) {
 				tableau[j].rotation();
