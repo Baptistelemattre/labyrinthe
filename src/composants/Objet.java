@@ -14,7 +14,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Constructeur permettant de construire un objet qui est initialement hors du plateau.
 	 * 
@@ -46,7 +46,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode retournant le numéro de l'objet.
 	 * 
@@ -60,7 +60,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode retournant le numéro de la ligne sur laquelle se trouve l'objet.
 	 * 
@@ -72,7 +72,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode retournant le numéro de la colonne sur laquelle se trouve l'objet.
 	 * 
@@ -85,7 +85,7 @@ public class Objet {
 	
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode permettant de positionner l'objet sur une ligne et une colonne données en paramètre.
 	 * 
@@ -100,7 +100,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode permettant d'enlever l'objet du plateau.
 	 * 
@@ -113,7 +113,7 @@ public class Objet {
 	
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * fait par benoit le 6/05 A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode indiquant si l'objet est sur le plateau au non.
 	 * 
@@ -137,7 +137,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * Méthode permettant de copier l'objet.
+	 * fait par benoit le 6/05 Méthode permettant de copier l'objet.
 	 * 
 	 * @return Une copie de l'objet.
 	 */
