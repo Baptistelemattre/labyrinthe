@@ -7,7 +7,7 @@ public class TestObjet {
     public static void main(String[] args) {
         Object[] parametres;
         parametres = IG.saisirParametres();
-        int nbJoueurs = ((Integer) parametres[0]).intValue();
+        int nbJoueurs = (Integer) parametres[0];
         IG.creerFenetreJeu("Bricodeurs de l'IUT de Lens", nbJoueurs);
         IG.rendreVisibleFenetreJeu();
         String[] message = {
