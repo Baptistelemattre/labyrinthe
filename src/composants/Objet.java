@@ -39,7 +39,7 @@ public class Objet {
 	 */
 	public static Objet[] nouveauxObjets(){
 		Objet objets[]=null;
-		objets = new objets[18];
+		objets = new Objet[18];
 
 
 		return objets;
