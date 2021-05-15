@@ -29,7 +29,7 @@ public class Objet {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * Baptiste et benoit le 15/05 fini A Faire (Quand Qui Statut)
 	 * 
 	 * Méthode permettant de générer un tableau contenant les 18 objets du jeu.
 	 * Les objets seront postionnées aléatoirement sur le plateau.  Deux objets ne pourront pas être sur une même case (même ligne et même colonne).
@@ -38,10 +38,26 @@ public class Objet {
 	 *
 	 */
 	public static Objet[] nouveauxObjets(){
-		Objet objets[]=null;
+		Objet[] objets;
 		objets = new Objet[18];
-
-
+		int nbObjet = 0;
+		for (int i = 0; i<objets.length; i++){
+			objets[i] = new Objet(i);
+			int x = Utils.genererEntier(6);
+			int y = Utils.genererEntier(6);
+			int j = 0;
+			while (j!= nbObjet){
+				if (objets[j].getPosColonnePlateau() != x || objets[j].getPosLignePlateau() != y ){
+					j++;
+				}else {
+					j = 0;
+					x = Utils.genererEntier(6);
+					y = Utils.genererEntier(6);
+				}
+			}
+			objets[i].positionneObjet(y,x);
+			nbObjet++;
+		}
 		return objets;
 	}
 
@@ -155,7 +171,7 @@ public class Objet {
 	public static void main(String[] args) {
 		// Un petit test ...
 		System.out.println("*** Génération et affichage des 18 objets ... ***");
-		Objet objetsJeu[]=nouveauxObjets();
+		Objet[] objetsJeu =nouveauxObjets();
 		for (int i=0;i<objetsJeu.length;i++)
 			System.out.println(objetsJeu[i]);
 		System.out.println("*** On enlève les 18 objets du plateau ... ***");
