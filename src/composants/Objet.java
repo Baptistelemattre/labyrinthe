@@ -43,19 +43,19 @@ public class Objet {
 		int nbObjet = 0;
 		for (int i = 0; i<objets.length; i++){
 			objets[i] = new Objet(i);
-			int x = Utils.genererEntier(6);
-			int y = Utils.genererEntier(6);
+			int col = Utils.genererEntier(6);
+			int lign = Utils.genererEntier(6);
 			int j = 0;
 			while (j!= nbObjet){
-				if (objets[j].getPosColonnePlateau() != x || objets[j].getPosLignePlateau() != y ){
+				if (objets[j].getPosColonnePlateau() != col || objets[j].getPosLignePlateau() != lign ){
 					j++;
 				}else {
 					j = 0;
-					x = Utils.genererEntier(6);
-					y = Utils.genererEntier(6);
+					col = Utils.genererEntier(6);
+					lign = Utils.genererEntier(6);
 				}
 			}
-			objets[i].positionneObjet(y,x);
+			objets[i].positionneObjet(lign,col);
 			nbObjet++;
 		}
 		return objets;
