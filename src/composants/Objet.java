@@ -25,6 +25,7 @@ public class Objet {
 		this.numObjet = numObjet;
 		this.posLignePlateau = -1;
 		this.posColonnePlateau = -1;
+		this.surPlateau = false;
 	}
 
 	/**
