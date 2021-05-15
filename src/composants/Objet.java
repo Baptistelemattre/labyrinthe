@@ -39,7 +39,7 @@ public class Objet {
 	 *
 	 */
 	public static Objet[] nouveauxObjets(){
-		Objet objets[]=null;
+		Objet[] objets =null;
 		// A Compléter
 		return objets;
 	}
