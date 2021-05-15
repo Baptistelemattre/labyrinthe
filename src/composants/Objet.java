@@ -121,10 +121,7 @@ public class Objet {
 	 * @return true si l'objet est sur le plateau, false sinon.
 	 */
 	public boolean surPlateau() {
-		if (posColonnePlateau==-1 && posLignePlateau == -1){
-			return true;
-		}
-		return false; // A Modifier
+		return posColonnePlateau == -1 && posLignePlateau == -1;// A Modifier
 	}
 
 	/**
