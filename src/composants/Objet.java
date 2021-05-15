@@ -21,7 +21,6 @@ public class Objet {
 	 * @param numObjet Le numéro de l'objet.
 	 */
 	public Objet(int numObjet) {
-		// A Compléter
 		this.numObjet = numObjet;
 		this.posLignePlateau = -1;
 		this.posColonnePlateau = -1;
@@ -39,8 +38,10 @@ public class Objet {
 	 *
 	 */
 	public static Objet[] nouveauxObjets(){
-		Objet[] objets =null;
-		// A Compléter
+		Objet objets[]=null;
+		objets = new objets[18];
+
+
 		return objets;
 	}
 
