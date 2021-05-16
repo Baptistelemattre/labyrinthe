@@ -27,5 +27,6 @@ public class TestObjet {
         IG.miseAJourAffichage();
         IG.attendreClic();
         IG.fermerFenetreJeu();
+        System.exit(0);
     }
 }

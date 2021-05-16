@@ -22,9 +22,9 @@ public class Objet {
 	 */
 	public Objet(int numObjet) {
 		this.numObjet = numObjet;
-		this.posLignePlateau = -1;
-		this.posColonnePlateau = -1;
-		this.surPlateau = false;
+		posLignePlateau = -1;
+		posColonnePlateau = -1;
+		surPlateau = false;
 	}
 
 	/**
@@ -127,6 +127,7 @@ public class Objet {
 		// A Compléter
 		posColonnePlateau = -1;
 		posLignePlateau= -1;
+		surPlateau = false;
 	}
 	
 	/**
