@@ -11,7 +11,7 @@ public class Plateau {
 	private Piece plateau[][]; // La grille des piÃƒÂ¨ces.
 
 	/**
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 * 
 	 * Constructeur permettant de construire un plateau vide (sans piÃƒÂ¨ces) et d'une taille de 7 lignes sur 7 colonnes.
 	 */
@@ -21,7 +21,7 @@ public class Plateau {
 	}
 
 	/**
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 * 
 	 * MÃƒÂ©thode permettant de placer une piÃƒÂ¨ce sur le plateau.
 	 * 
@@ -35,7 +35,7 @@ public class Plateau {
 	}
 
 	/**
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 * 
 	 * MÃƒÂ©thode retournant une piÃƒÂ¨ce se trouvant sur le plateau Ãƒ  un emplacement spÃƒÂ©cifique.
 	 * 
@@ -54,7 +54,7 @@ public class Plateau {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 *  
 	 * MÃƒÂ©thode permettant de placer alÃƒÂ©atoirment 49 piÃƒÂ¨ces du jeu sur le plateau.
 	 * L'orientation des piÃƒÂ¨ces est alÃƒÂ©atoire. Les piÃƒÂ¨ces utilisÃƒÂ©es doivent ÃƒÂªtre des nouvelles piÃƒÂ¨ces gÃƒÂ©nÃƒÂ©rÃƒÂ©es Ãƒ  partir de la mÃƒÂ©thode Piece.nouvellesPieces.
@@ -100,7 +100,7 @@ public class Plateau {
 
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 * 
 	 * MÃƒÂ©thode permettant de tester si les positions passÃƒÂ©es en paramÃƒÂ¨tre sont les positions de deux cases diffÃƒÂ©rentes et adjacentes 
 	 * de la grille de jeu et qu'il est possible de passer d'une cas Ãƒ  l'autre compte tenu des deux piÃƒÂ¨ces posÃƒÂ©es sur les deux cases du plateau.
@@ -164,15 +164,15 @@ public class Plateau {
 	
 	/**
 	 * 
-	 * A Faire (Quand Qui Statut)
+	 * 17/05/2021 Victor Fini (Quand Qui Statut)
 	 * 
-	 * Méthode permettant de retourner un éventuel chemin entre deux cases du plateau compte tenu des pièces posées sur le plateau.
-     * Dans le cas où il n'y a pas de chemin entre les deux cases, la valeur null est retournée.
-     * Dans le cas où il existe un chemin, un chemin possible est retourné sous forme d'un tableau d'entiers à  deux dimensions.
-     * La première dimension correspond aux cases du plateau à  emprunter pour aller de la case de départ à  la case d'arrivée.
-     * Dans ce tableau, chaque case est un tableau de deux entiers avec le premier entier qui correspond à  la ligne de la case et
-     * le second entier qui correspond à  la colonne de la case. La première case d'un chemin retourné correspond toujours 
-     * à  la case (posLigCaseDep,posColCaseDep) et la dernière case correspond toujours à  la case (posLigCaseArr,posColCaseArr).
+	 * Mï¿½thode permettant de retourner un ï¿½ventuel chemin entre deux cases du plateau compte tenu des piï¿½ces posï¿½es sur le plateau.
+     * Dans le cas oï¿½ il n'y a pas de chemin entre les deux cases, la valeur null est retournï¿½e.
+     * Dans le cas oï¿½ il existe un chemin, un chemin possible est retournï¿½ sous forme d'un tableau d'entiers ï¿½  deux dimensions.
+     * La premiï¿½re dimension correspond aux cases du plateau ï¿½  emprunter pour aller de la case de dï¿½part ï¿½  la case d'arrivï¿½e.
+     * Dans ce tableau, chaque case est un tableau de deux entiers avec le premier entier qui correspond ï¿½  la ligne de la case et
+     * le second entier qui correspond ï¿½  la colonne de la case. La premiï¿½re case d'un chemin retournï¿½ correspond toujours 
+     * ï¿½  la case (posLigCaseDep,posColCaseDep) et la derniï¿½re case correspond toujours ï¿½  la case (posLigCaseArr,posColCaseArr).
 	 *
 	 * @param posLigCaseDep La ligne de la case de dÃƒÂ©part (un entier compris entre 0 et 6).
 	 * @param posColCaseDep La colonne de la case de dÃƒÂ©part (un entier compris entre 0 et 6).
@@ -185,7 +185,7 @@ public class Plateau {
 		int posActL = posLigCaseDep;
 		int posActC = posColCaseDep;
 		int entreeAct = -1;
-		boolean copyPlateau[][] = new boolean[7][7]; //Tableau permettant de stocker les cases déjà visités
+		boolean copyPlateau[][] = new boolean[7][7]; //Tableau permettant de stocker les cases dï¿½jï¿½ visitï¿½s
 		Vector<Integer> couple = new Vector<Integer>();
 		Vector<Vector<Integer>> chemin = new Vector<Vector<Integer>>();
 		
@@ -201,8 +201,8 @@ public class Plateau {
 		chemin.add(couple);
 		
 		while(posActL != posLigCaseArr && posActC != posColCaseArr) {
-			if(nbEntrees(posActL,posActC) > 1) { //Parcours dans le sens des aiguilles d'une montre les différents chemins
-				//Vérification si il y a un passage entre les différentes cases, que l'entrée est différente de la sortie et si cette même case n'a été visité
+			if(nbEntrees(posActL,posActC) > 1) { //Parcours dans le sens des aiguilles d'une montre les diffï¿½rents chemins
+				//Vï¿½rification si il y a un passage entre les diffï¿½rentes cases, que l'entrï¿½e est diffï¿½rente de la sortie et si cette mï¿½me case n'a ï¿½tï¿½ visitï¿½
 				if(passageEntreCases(posActL,posActC,posActL-1,posActC) && entreeAct != 0 && copyPlateau[posActL-1][posActC]) {
 					entreeAct = 2;
 					posActL = posActL-1;
@@ -235,7 +235,7 @@ public class Plateau {
 					copyPlateau[couple.get(0)][couple.get(1)] = false;
 					chemin.add(couple);
 				}
-				else if(chemin.size()==0) { //Cas chemin inexistant car, possède plusieurs entrées et qu'elles sont toutes déjà visité et qu'on est actuellement au point de départ
+				else if(chemin.size()==0) { //Cas chemin inexistant car, possï¿½de plusieurs entrï¿½es et qu'elles sont toutes dï¿½jï¿½ visitï¿½ et qu'on est actuellement au point de dï¿½part
 					return null;
 				}
 			}		
@@ -243,19 +243,19 @@ public class Plateau {
 				chemin.remove(chemin.size()-1);
 				int posL = chemin.get(chemin.size()-1).get(0);
 				int posC = chemin.get(chemin.size()-1).get(1);
-				if(plateau[posActL-1][posActC] == plateau[posL][posC]) { //Vérification si case du dessus correspond à la dernière pièce visité, hors actuelle
+				if(plateau[posActL-1][posActC] == plateau[posL][posC]) { //Vï¿½rification si case du dessus correspond ï¿½ la derniï¿½re piï¿½ce visitï¿½, hors actuelle
 					entreeAct = 2;
 					posActL = posActL-1;
 				}
-				else if(plateau[posActL][posActC+1] == plateau[posL][posC]) { //Vérification si case à droite correspond à la dernière pièce visité, hors actuelle
+				else if(plateau[posActL][posActC+1] == plateau[posL][posC]) { //Vï¿½rification si case ï¿½ droite correspond ï¿½ la derniï¿½re piï¿½ce visitï¿½, hors actuelle
 					entreeAct = 3;
 					posActC = posActC+1;
 				}
-				else if(plateau[posActL+1][posActC] == plateau[posL][posC]) { //Vérification si case du bas correspond à la dernière pièce visité, hors actuelle
+				else if(plateau[posActL+1][posActC] == plateau[posL][posC]) { //Vï¿½rification si case du bas correspond ï¿½ la derniï¿½re piï¿½ce visitï¿½, hors actuelle
 					entreeAct = 0;
 					posActL = posActL+1;
 				}
-				else if(plateau[posActL][posActC-1] == plateau[posL][posC]) { //Vérification si case à droite correspond à la dernière pièce visité, hors actuelle
+				else if(plateau[posActL][posActC-1] == plateau[posL][posC]) { //Vï¿½rification si case ï¿½ droite correspond ï¿½ la derniï¿½re piï¿½ce visitï¿½, hors actuelle
 					entreeAct = 3;
 					posActC = posActC-1;
 				}
