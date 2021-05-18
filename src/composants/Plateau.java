@@ -132,28 +132,21 @@ public class Plateau {
 	}
 
 	
-	private int nbEntrees(int L,int C) {
-		boolean[] tmp = new boolean[] {false,false,false,false};
+	private int nbPassagePossible(int L,int C, boolean[][] pieceDejaVisiter, int entreePris) { //Changer en nombre d'entr�es possible actuelle vers de nouvelles cases
 		int nbEntrees = 0;
 		
-		if(passageEntreCases(L,C,L-1,C)) {
-			tmp[0] = true;
+		if(passageEntreCases(L,C,L-1,C) && pieceDejaVisiter[L-1][C] && entreePris != 0) {
 			nbEntrees+=1;
 		}
-		if(passageEntreCases(L,C,L,C+1)) {
-			tmp[1] = true;
+		if(passageEntreCases(L,C,L,C+1) && pieceDejaVisiter[L][C+1] && entreePris != 1) {
 			nbEntrees+=1;
 		}
-		if(passageEntreCases(L,C,L+1,C)) {
-			tmp[2] = true;
+		if(passageEntreCases(L,C,L+1,C) && pieceDejaVisiter[L+1][C] && entreePris != 2) {
 			nbEntrees+=1;
 		}
-		if(passageEntreCases(L,C,L,C-1)) {
-			tmp[3] = true;
+		if(passageEntreCases(L,C,L,C-1) && pieceDejaVisiter[L][C-1] && entreePris != 3) {
 			nbEntrees+=1;
 		}
-		
-		
 		return nbEntrees;
 	}
 	
@@ -182,83 +175,77 @@ public class Plateau {
 	 */
 	public int[][] calculeChemin(int posLigCaseDep,int posColCaseDep,int posLigCaseArr,int posColCaseArr){
 		int resultat[][]=null;
-		int posActL = posLigCaseDep;
-		int posActC = posColCaseDep;
-		int entreeAct = -1;
-		boolean copyPlateau[][] = new boolean[7][7]; //Tableau permettant de stocker les cases d�j� visit�s
+		int ligActuelle = posLigCaseDep;
+		int colActuelle = posColCaseDep;
+		int entreePris = -1;
+		boolean pieceDejaVisiter[][] = new boolean[7][7]; //Tableau permettant de stocker les cases d�j� visit�s
 		Vector<Integer> couple = new Vector<Integer>();
 		Vector<Vector<Integer>> chemin = new Vector<Vector<Integer>>();
 		
 		for(int i = 0; i < 7 ; i++) { //Initialise le tableau de true;
 			for(int n = 0; n < 7; n++) {
-				copyPlateau[i][n] = true;
+				pieceDejaVisiter[i][n] = true;
 			}
 		}
 		
-		copyPlateau[posActL][posActC] = false;
-		couple.add(posActL);
-		couple.add(posActC);
+		//Initialisation des attributs pour la premiere piece / case de depart
+		pieceDejaVisiter[ligActuelle][colActuelle] = false;
+		couple.add(ligActuelle);
+		couple.add(colActuelle);
 		chemin.add(couple);
 		
-		while(posActL != posLigCaseArr && posActC != posColCaseArr) {
-			if(nbEntrees(posActL,posActC) > 1) { //Parcours dans le sens des aiguilles d'une montre les diff�rents chemins
+		while(ligActuelle != posLigCaseArr && colActuelle != posColCaseArr) {
+			if(nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) >= 1) {
 				//V�rification si il y a un passage entre les diff�rentes cases, que l'entr�e est diff�rente de la sortie et si cette m�me case n'a �t� visit�
-				if(passageEntreCases(posActL,posActC,posActL-1,posActC) && entreeAct != 0 && copyPlateau[posActL-1][posActC]) {
-					entreeAct = 2;
-					posActL = posActL-1;
-					couple.set(0, posActL);
-					couple.set(1, posActC);
-					copyPlateau[couple.get(0)][couple.get(1)] = false;
-					chemin.add(couple);
+				if(passageEntreCases(ligActuelle,colActuelle,ligActuelle-1,colActuelle) && entreePris != 0 && pieceDejaVisiter[ligActuelle-1][colActuelle]) {
+					entreePris = 2;
+					ligActuelle = ligActuelle-1;
 				}
-				else if (passageEntreCases(posActL,posActC,posActL,posActC+1) && entreeAct != 1 && copyPlateau[posActL][posActC+1]) {
-					entreeAct = 3;
-					posActC = posActC+1;
-					couple.set(0, posActL);
-					couple.set(1, posActC);
-					copyPlateau[couple.get(0)][couple.get(1)] = false;
-					chemin.add(couple);
+				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle+1) && entreePris != 1 && pieceDejaVisiter[ligActuelle][colActuelle+1]) {
+					entreePris = 3;
+					colActuelle = colActuelle+1;
 				}
-				else if (passageEntreCases(posActL,posActC,posActL+1,posActC) && entreeAct != 2 && copyPlateau[posActL+1][posActC]) {
-					entreeAct = 0;
-					posActL = posActL+1;
-					couple.set(0, posActL);
-					couple.set(1, posActC);
-					copyPlateau[couple.get(0)][couple.get(1)] = false;
-					chemin.add(couple);
+				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+					entreePris = 0;
+					ligActuelle = ligActuelle+1;
 				}
-				else if (passageEntreCases(posActL,posActC,posActL,posActC-1) && entreeAct != 3 && copyPlateau[posActL][posActC-1]) {
-					entreeAct = 1;
-					posActC = posActC-1;
-					couple.set(0, posActL);
-					couple.set(1, posActC);
-					copyPlateau[couple.get(0)][couple.get(1)] = false;
-					chemin.add(couple);
+				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle-1) && entreePris != 3 && pieceDejaVisiter[ligActuelle][colActuelle-1]) {
+					entreePris = 1;
+					colActuelle = colActuelle-1;
 				}
-				else if(chemin.size()==0) { //Cas chemin inexistant car, poss�de plusieurs entr�es et qu'elles sont toutes d�j� visit� et qu'on est actuellement au point de d�part
-					return null;
-				}
+				// Ajout de la nouvelle piece actuelle dans chemin
+				couple.set(0, ligActuelle);
+				couple.set(1, colActuelle);	
+				pieceDejaVisiter[ligActuelle][colActuelle] = false;
+				chemin.add((Vector<Integer>)couple.clone());
 			}		
 			else {
+				// Retour en arriere si aucun passage existante et non pris
 				chemin.remove(chemin.size()-1);
-				int posL = chemin.get(chemin.size()-1).get(0);
-				int posC = chemin.get(chemin.size()-1).get(1);
-				if(plateau[posActL-1][posActC] == plateau[posL][posC]) { //V�rification si case du dessus correspond � la derni�re pi�ce visit�, hors actuelle
-					entreeAct = 2;
-					posActL = posActL-1;
+				if (chemin.size() >= 1) {
+					int posL = chemin.get(chemin.size()-1).get(0);
+					int posC = chemin.get(chemin.size()-1).get(1);
+					if(ligActuelle-1 == posL) { //V�rification si case du dessus correspond � la derni�re pi�ce visit�, hors actuelle
+						entreePris = 2;
+						ligActuelle = ligActuelle-1;
+					}
+					else if(colActuelle+1 == posC) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
+						entreePris = 1;
+						colActuelle = colActuelle+1;
+					}
+					else if(ligActuelle+1 == posL) { //V�rification si case du bas correspond � la derni�re pi�ce visit�, hors actuelle
+						entreePris = 0;
+						ligActuelle = ligActuelle+1;
+					}
+					else if(colActuelle-1 == posC) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
+						entreePris = 3;
+						colActuelle = colActuelle-1;
+					}
 				}
-				else if(plateau[posActL][posActC+1] == plateau[posL][posC]) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
-					entreeAct = 3;
-					posActC = posActC+1;
+				else {
+					return null;
 				}
-				else if(plateau[posActL+1][posActC] == plateau[posL][posC]) { //V�rification si case du bas correspond � la derni�re pi�ce visit�, hors actuelle
-					entreeAct = 0;
-					posActL = posActL+1;
-				}
-				else if(plateau[posActL][posActC-1] == plateau[posL][posC]) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
-					entreeAct = 3;
-					posActC = posActC-1;
-				}
+
 			}
 		}
 
