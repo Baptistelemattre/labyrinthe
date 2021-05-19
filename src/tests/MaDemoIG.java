@@ -7,7 +7,7 @@ public class MaDemoIG {
 		// set param
 		Object param[];
 		param = IG.saisirParametres();
-		int nombreDeJoueur = ((Integer)param[0]).intValue();
+		int nombreDeJoueur = (Integer) param[0];
 		IG.creerFenetreJeu("Demo groupe bricodeur",nombreDeJoueur);
 		IG.rendreVisibleFenetreJeu();
 		for (int i = 0;i<nombreDeJoueur;i++) {
