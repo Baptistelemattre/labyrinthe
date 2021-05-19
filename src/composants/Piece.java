@@ -48,9 +48,12 @@ abstract public class Piece {
 	 * MÃ©thode permettant de rotationner une piÃ¨ce dans le sens d'une horloge.
 	 */
 	public void rotation(){
+		
 		if (orientationPiece !=3) {
 			orientationPiece++;
-		}else orientationPiece = 0;
+		}else { 
+			orientationPiece = 0;
+		}
 		modifierEntree();
 	}
 
@@ -61,15 +64,27 @@ abstract public class Piece {
 	 * @param orientationPiece Un entier correspondant Ã  la nouvelle orientation de la piÃ¨ce.
 	 */
 	public void setOrientation(int orientationPiece){
-		while (this.orientationPiece != orientationPiece)rotation();
+		
+		while (this.orientationPiece != orientationPiece) {
+			rotation();
+		}
 	}
 
 	private void modifierEntree() {
+		
+		boolean temp = pointsEntree[3];
+		pointsEntree[3] = pointsEntree[2];
+		pointsEntree[2] = pointsEntree[1];
+		pointsEntree[1] = pointsEntree[0];
+		pointsEntree[0] = temp ;
+		/*
 		boolean temp[] = pointsEntree;
 		pointsEntree[0] = temp[3];
 		pointsEntree[1] = temp[0];
 		pointsEntree[2] = temp[1];
 		pointsEntree[3] = temp[2] ;
+*/
+		
 	}
 	/**
 	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste
@@ -121,7 +136,9 @@ abstract public class Piece {
 	private static void addPieceAndRotationAndRotate(Piece[] tabPiece, Piece piece, int index){
 		int choixOrientation;
 		choixOrientation = Utils.genererEntier(3);
+		//System.out.println("1 " + piece.getPointEntree(0) + " " + piece.getPointEntree(1) + piece.getPointEntree(2) + piece.getPointEntree(3));
 		piece.setOrientation(choixOrientation);
+		//System.out.println("2 " + piece.getPointEntree(0) + " " + piece.getPointEntree(1) + piece.getPointEntree(2) + piece.getPointEntree(3));
 		tabPiece[index] = piece;
 	}
 
