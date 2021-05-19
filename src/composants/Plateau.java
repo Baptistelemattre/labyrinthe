@@ -112,49 +112,42 @@ public class Plateau {
 	 * @return true si les positions passÃ©es en paramÃ¨tre sont les positions de deux cases diffÃ©rentes et adjacentes de la grille de jeu et qu'il est possible de passer d'une cas Ã  l'autre compte tenu des deux piÃ¨ces posÃ©es sur les deux cases du plateau, false sinon.
 	 */
 	private boolean passageEntreCases(int posLigCase1,int posColCase1,int posLigCase2,int posColCase2){
-		/*
-		boolean rep = false;
+		boolean resultat = false;
 		if (posLigCase1 != posLigCase2 && posColCase1 != posColCase2 && casesAdjacentes(posLigCase1,posColCase1,posLigCase2,posColCase2)) {
 			if(posLigCase1 < posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(2) && plateau[posLigCase2][posColCase2].getPointEntree(0)) { //position relatif Bas
-				rep = true;
+				resultat = true;
 			}
 			else if(posLigCase1 > posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(0) && plateau[posLigCase2][posColCase2].getPointEntree(2)) { //position relatif Haut
-				rep = true;
+				resultat = true;
 			}
 			else if (posColCase1 < posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(1) && plateau[posLigCase2][posColCase2].getPointEntree(3)) {//position relatif Droite
-				rep = true;
+				resultat = true;
 			}
 			else if (posColCase1 > posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(3) && plateau[posLigCase2][posColCase2].getPointEntree(1)) { //position relatif Gauche
-				rep = true;
+				resultat = true;
 			}
 		}
-		return rep;
-		*/		
-		 // A Modifier
-		return (casesAdjacentes(posLigCase1, posColCase1, posLigCase2, posColCase2) && 
-	            ((posLigCase1<posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(2) && plateau[posLigCase2][posColCase2].getPointEntree(0))// 1 au dessus de 2
-	             || (posColCase1>posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(3) && plateau[posLigCase2][posColCase2].getPointEntree(1))// 1 a droite de 2
-	              || (posLigCase1>posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(0) && plateau[posLigCase2][posColCase2].getPointEntree(2))// 1 en dessous de 2
-	               || (posColCase1<posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(1) && plateau[posLigCase2][posColCase2].getPointEntree(3)))); // gauche
+		return resultat;
+
 	}
 
 	
-	private int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceDejaVisiter, int entreePris) { //Changer en nombre d'entr�es possible actuelle vers de nouvelles cases
+	private int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceDejaVisiter) { //Changer en nombre d'entr�es possible actuelle vers de nouvelles cases
 		int nbEntrees = 0;
 		System.out.println("modele : " + plateau[ligActuelle][colActuelle].getModelePiece() + " orientation : " + plateau[ligActuelle][colActuelle].getOrientationPiece());
-		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle))  {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle) && pieceDejaVisiter[ligActuelle-1][colActuelle]==true)  {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Haut");
 		}
-		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1)) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1) && pieceDejaVisiter[ligActuelle][colActuelle-1]==true) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Droite");
 		}
-		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle)) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle) && pieceDejaVisiter[ligActuelle+1][colActuelle]==true) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Bas");
 		}
-		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1)) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1) && pieceDejaVisiter[ligActuelle][colActuelle+1]==true) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Gauche");
 		}
@@ -191,7 +184,7 @@ public class Plateau {
 		int entreePris = -1;
 		boolean pieceDejaVisiter[][] = new boolean[7][7]; //Tableau permettant de stocker les cases d�j� visit�s
 		Vector<int[]> chemin = new Vector<int[]>();
-		int count = 0;
+		
 		
 		for(int i = 0; i < 7 ; i++) { //Initialise le tableau de true;
 			for(int n = 0; n < 7; n++) {
@@ -204,24 +197,20 @@ public class Plateau {
 		chemin.add(new int[] {posLigCaseDep,posColCaseDep});
 		
 		while(ligActuelle != posLigCaseArr && colActuelle != posColCaseArr) {
-			count ++;
-			System.out.println("\n\nCoordonn�es " + ligActuelle + " " + colActuelle + " Nombre passages : " + nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) + " Entree prise :" + entreePris + " count : " + count);
-			if(nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) >= 1) {
+			int tmp = nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter);
+			System.out.println("\n\nCoordonn�es " + ligActuelle + " " + colActuelle + " Nombre passages : " + tmp + " Entree prise :" + entreePris);
+			if(tmp >= 1) {
 				//V�rification si il y a un passage entre les diff�rentes cases, que l'entr�e est diff�rente de la sortie et si cette m�me case n'a �t� visit�
 				if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle) && pieceDejaVisiter[ligActuelle-1][colActuelle]==true) {
-					entreePris = 2;
 					ligActuelle = ligActuelle-1;
 				}
 				else if (passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1) && pieceDejaVisiter[ligActuelle][colActuelle-1]==true) {
-					entreePris = 3;
 					colActuelle = colActuelle+1;
 				}
 				else if (passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle) && pieceDejaVisiter[ligActuelle+1][colActuelle]==true) {
-					entreePris = 0;
 					ligActuelle = ligActuelle+1;
 				}
 				else if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1) && pieceDejaVisiter[ligActuelle][colActuelle+1]==true) {
-					entreePris = 1;
 					colActuelle = colActuelle-1;
 				}
 				// Ajout de la nouvelle piece actuelle dans chemin
@@ -238,19 +227,15 @@ public class Plateau {
 					int posL = chemin.get(chemin.size()-1)[0];
 					int posC = chemin.get(chemin.size()-1)[1];
 					if(ligActuelle-1 == posL) { //V�rification si case du dessus correspond � la derni�re pi�ce visit�, hors actuelle
-						entreePris = 2;
 						ligActuelle = ligActuelle-1;
 					}
 					else if(colActuelle+1 == posC) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
-						entreePris = 1;
 						colActuelle = colActuelle+1;
 					}
 					else if(ligActuelle+1 == posL) { //V�rification si case du bas correspond � la derni�re pi�ce visit�, hors actuelle
-						entreePris = 0;
 						ligActuelle = ligActuelle+1;
 					}
 					else if(colActuelle-1 == posC) { //V�rification si case � droite correspond � la derni�re pi�ce visit�, hors actuelle
-						entreePris = 3;
 						colActuelle = colActuelle-1;
 					}
 				}
