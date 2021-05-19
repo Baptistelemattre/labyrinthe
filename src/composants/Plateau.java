@@ -141,20 +141,20 @@ public class Plateau {
 	
 	private int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceDejaVisiter, int entreePris) { //Changer en nombre d'entrï¿½es possible actuelle vers de nouvelles cases
 		int nbEntrees = 0;
-		System.out.println("modele " + plateau[ligActuelle][colActuelle].getModelePiece());
-		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle-1,colActuelle) && entreePris != 0 && pieceDejaVisiter[ligActuelle-1][colActuelle]) {
+		System.out.println("modele : " + plateau[ligActuelle][colActuelle].getModelePiece() + " orientation : " + plateau[ligActuelle][colActuelle].getOrientationPiece());
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle))  {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Haut");
 		}
-		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle+1) && entreePris != 1 && pieceDejaVisiter[ligActuelle][colActuelle+1]) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1)) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Droite");
 		}
-		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle)) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Bas");
 		}
-		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1)) {
 			nbEntrees = nbEntrees + 1;
 			System.out.println("Gauche");
 		}
@@ -190,8 +190,8 @@ public class Plateau {
 		int colActuelle = posColCaseDep;
 		int entreePris = -1;
 		boolean pieceDejaVisiter[][] = new boolean[7][7]; //Tableau permettant de stocker les cases dï¿½jï¿½ visitï¿½s
-		Vector<Integer> couple = new Vector<Integer>();
-		Vector<Vector<Integer>> chemin = new Vector<Vector<Integer>>();
+		Vector<int[]> chemin = new Vector<int[]>();
+		int count = 0;
 		
 		for(int i = 0; i < 7 ; i++) { //Initialise le tableau de true;
 			for(int n = 0; n < 7; n++) {
@@ -201,42 +201,42 @@ public class Plateau {
 		
 		//Initialisation des attributs pour la premiere piece / case de depart
 		pieceDejaVisiter[ligActuelle][colActuelle] = false;
-		couple.add(ligActuelle);
-		couple.add(colActuelle);
-		chemin.add(couple);
+		chemin.add(new int[] {posLigCaseDep,posColCaseDep});
 		
 		while(ligActuelle != posLigCaseArr && colActuelle != posColCaseArr) {
-			System.out.println("Coordonnées " + ligActuelle + " " + colActuelle + " Nombre passages : " + nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) + " Entree prise :" + entreePris);
+			count ++;
+			System.out.println("\n\nCoordonnées " + ligActuelle + " " + colActuelle + " Nombre passages : " + nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) + " Entree prise :" + entreePris + " count : " + count);
 			if(nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) >= 1) {
 				//Vï¿½rification si il y a un passage entre les diffï¿½rentes cases, que l'entrï¿½e est diffï¿½rente de la sortie et si cette mï¿½me case n'a ï¿½tï¿½ visitï¿½
-				if(passageEntreCases(ligActuelle,colActuelle,ligActuelle-1,colActuelle) && entreePris != 0 && pieceDejaVisiter[ligActuelle-1][colActuelle]) {
+				if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle) && pieceDejaVisiter[ligActuelle-1][colActuelle]==true) {
 					entreePris = 2;
 					ligActuelle = ligActuelle-1;
 				}
-				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle+1) && entreePris != 1 && pieceDejaVisiter[ligActuelle][colActuelle+1]) {
+				else if (passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1) && pieceDejaVisiter[ligActuelle][colActuelle-1]==true) {
 					entreePris = 3;
 					colActuelle = colActuelle+1;
 				}
-				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+				else if (passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle) && pieceDejaVisiter[ligActuelle+1][colActuelle]==true) {
 					entreePris = 0;
 					ligActuelle = ligActuelle+1;
 				}
-				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+				else if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1) && pieceDejaVisiter[ligActuelle][colActuelle+1]==true) {
 					entreePris = 1;
 					colActuelle = colActuelle-1;
 				}
 				// Ajout de la nouvelle piece actuelle dans chemin
-				couple.set(0, ligActuelle);
-				couple.set(1, colActuelle);	
+				int[] couple = new int[2];
+				couple[0] = ligActuelle;
+				couple[1] = colActuelle;
 				pieceDejaVisiter[ligActuelle][colActuelle] = false;
-				chemin.add((Vector<Integer>)couple.clone());
+				chemin.add(couple);
 			}		
 			else {
 				// Retour en arriere si aucun passage existante et non pris
 				chemin.remove(chemin.size()-1);
 				if (chemin.size() >= 1) {
-					int posL = chemin.get(chemin.size()-1).get(0);
-					int posC = chemin.get(chemin.size()-1).get(1);
+					int posL = chemin.get(chemin.size()-1)[0];
+					int posC = chemin.get(chemin.size()-1)[1];
 					if(ligActuelle-1 == posL) { //Vï¿½rification si case du dessus correspond ï¿½ la derniï¿½re piï¿½ce visitï¿½, hors actuelle
 						entreePris = 2;
 						ligActuelle = ligActuelle-1;
@@ -263,8 +263,8 @@ public class Plateau {
 
 		resultat = new int[chemin.size()][2];
 		for(int i = 0; i < chemin.size(); i++) {
-			resultat[i][0] = chemin.get(i).get(0);
-			resultat[i][1] = chemin.get(i).get(1);
+			resultat[i][0] = chemin.get(i)[0];
+			resultat[i][1] = chemin.get(i)[1];
 		}
 		
 		// A ComplÃƒÂ©ter
