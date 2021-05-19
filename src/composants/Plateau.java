@@ -112,6 +112,7 @@ public class Plateau {
 	 * @return true si les positions passÃ©es en paramÃ¨tre sont les positions de deux cases diffÃ©rentes et adjacentes de la grille de jeu et qu'il est possible de passer d'une cas Ã  l'autre compte tenu des deux piÃ¨ces posÃ©es sur les deux cases du plateau, false sinon.
 	 */
 	private boolean passageEntreCases(int posLigCase1,int posColCase1,int posLigCase2,int posColCase2){
+		/*
 		boolean rep = false;
 		if (posLigCase1 != posLigCase2 && posColCase1 != posColCase2 && casesAdjacentes(posLigCase1,posColCase1,posLigCase2,posColCase2)) {
 			if(posLigCase1 < posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(2) && plateau[posLigCase2][posColCase2].getPointEntree(0)) { //position relatif Bas
@@ -127,25 +128,35 @@ public class Plateau {
 				rep = true;
 			}
 		}
-		return rep;		
+		return rep;
+		*/		
 		 // A Modifier
+		return (casesAdjacentes(posLigCase1, posColCase1, posLigCase2, posColCase2) && 
+	            ((posLigCase1<posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(2) && plateau[posLigCase2][posColCase2].getPointEntree(0))// 1 au dessus de 2
+	             || (posColCase1>posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(3) && plateau[posLigCase2][posColCase2].getPointEntree(1))// 1 a droite de 2
+	              || (posLigCase1>posLigCase2 && plateau[posLigCase1][posColCase1].getPointEntree(0) && plateau[posLigCase2][posColCase2].getPointEntree(2))// 1 en dessous de 2
+	               || (posColCase1<posColCase2 && plateau[posLigCase1][posColCase1].getPointEntree(1) && plateau[posLigCase2][posColCase2].getPointEntree(3)))); // gauche
 	}
 
 	
-	private int nbPassagePossible(int L,int C, boolean[][] pieceDejaVisiter, int entreePris) { //Changer en nombre d'entr�es possible actuelle vers de nouvelles cases
+	private int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceDejaVisiter, int entreePris) { //Changer en nombre d'entr�es possible actuelle vers de nouvelles cases
 		int nbEntrees = 0;
-		
-		if(passageEntreCases(L,C,L-1,C) && pieceDejaVisiter[L-1][C] && entreePris != 0) {
-			nbEntrees+=1;
+		System.out.println("modele " + plateau[ligActuelle][colActuelle].getModelePiece());
+		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle-1,colActuelle) && entreePris != 0 && pieceDejaVisiter[ligActuelle-1][colActuelle]) {
+			nbEntrees = nbEntrees + 1;
+			System.out.println("Haut");
 		}
-		if(passageEntreCases(L,C,L,C+1) && pieceDejaVisiter[L][C+1] && entreePris != 1) {
-			nbEntrees+=1;
+		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle+1) && entreePris != 1 && pieceDejaVisiter[ligActuelle][colActuelle+1]) {
+			nbEntrees = nbEntrees + 1;
+			System.out.println("Droite");
 		}
-		if(passageEntreCases(L,C,L+1,C) && pieceDejaVisiter[L+1][C] && entreePris != 2) {
-			nbEntrees+=1;
+		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+			nbEntrees = nbEntrees + 1;
+			System.out.println("Bas");
 		}
-		if(passageEntreCases(L,C,L,C-1) && pieceDejaVisiter[L][C-1] && entreePris != 3) {
-			nbEntrees+=1;
+		if(passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
+			nbEntrees = nbEntrees + 1;
+			System.out.println("Gauche");
 		}
 		return nbEntrees;
 	}
@@ -195,6 +206,7 @@ public class Plateau {
 		chemin.add(couple);
 		
 		while(ligActuelle != posLigCaseArr && colActuelle != posColCaseArr) {
+			System.out.println("Coordonn�es " + ligActuelle + " " + colActuelle + " Nombre passages : " + nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) + " Entree prise :" + entreePris);
 			if(nbPassagePossible(ligActuelle,colActuelle,pieceDejaVisiter, entreePris) >= 1) {
 				//V�rification si il y a un passage entre les diff�rentes cases, que l'entr�e est diff�rente de la sortie et si cette m�me case n'a �t� visit�
 				if(passageEntreCases(ligActuelle,colActuelle,ligActuelle-1,colActuelle) && entreePris != 0 && pieceDejaVisiter[ligActuelle-1][colActuelle]) {
@@ -209,7 +221,7 @@ public class Plateau {
 					entreePris = 0;
 					ligActuelle = ligActuelle+1;
 				}
-				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle,colActuelle-1) && entreePris != 3 && pieceDejaVisiter[ligActuelle][colActuelle-1]) {
+				else if (passageEntreCases(ligActuelle,colActuelle,ligActuelle+1,colActuelle) && entreePris != 2 && pieceDejaVisiter[ligActuelle+1][colActuelle]) {
 					entreePris = 1;
 					colActuelle = colActuelle-1;
 				}
