@@ -1,6 +1,7 @@
-package Joueur;
+package joueurs;
 
 import grafix.interfaceGraphique.IG;
+import joueurs.Joueur;
 import partie.ElementsPartie;
 
 

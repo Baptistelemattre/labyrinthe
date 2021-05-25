@@ -69,13 +69,13 @@ public abstract class Joueur {
 			if (typeJoueur.equals("Humain")) 
 				joueurs[i]=new JoueurHumain(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
 			else if (typeJoueur.equals("OrdiType0")) 
-				joueurs[i]=new JoueurOrdinateurT0(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
+				joueurs[i]=new joueurs.JoueurOrdinateurT0(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
 			else if (typeJoueur.equals("OrdiType1")) 
-				joueurs[i]=new JoueurOrdinateurT1(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
+				joueurs[i]=new joueurs.JoueurOrdinateurT1(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
 			else if (typeJoueur.equals("OrdiType2")) 
-				joueurs[i]=new JoueurOrdinateurT2(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
+				joueurs[i]=new joueurs.JoueurOrdinateurT2(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
 			else if (typeJoueur.equals("OrdiType3")) 
-				joueurs[i]=new JoueurOrdinateurT3(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
+				joueurs[i]=new joueurs.JoueurOrdinateurT3(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);
 			else {
 				System.err.println("Type de joueur non géré : "+typeJoueur+" création d'un joueur du type par défaut (Humain) ...");
 				joueurs[i]=new JoueurHumain(i,nomJoueur,numImageJoueur,posJoueurs[i][0],posJoueurs[i][1]);

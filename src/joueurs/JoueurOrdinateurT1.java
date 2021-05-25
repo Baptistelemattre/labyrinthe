@@ -1,4 +1,4 @@
-package Joueur;
+package joueurs;
 
 import composants.Objet;
 import composants.Plateau;
@@ -13,7 +13,7 @@ import partie.ElementsPartie;
  *
  */
 
-public class JoueurOrdinateurT1 extends JoueurOrdinateur {
+public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
 
     /**
      *

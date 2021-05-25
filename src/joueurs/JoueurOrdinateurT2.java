@@ -1,4 +1,4 @@
-package Joueur;
+package joueurs;
 
 import composants.Objet;
 import composants.Piece;

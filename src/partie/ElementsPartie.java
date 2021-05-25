@@ -4,7 +4,7 @@ import composants.Objet;
 import composants.Piece;
 import composants.Plateau;
 import composants.Utils;
-import Joueur.Joueur;
+import joueurs.Joueur;
 
 /**
  *
