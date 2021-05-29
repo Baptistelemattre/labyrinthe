@@ -33,8 +33,12 @@ public class ElementsPartie {
      * @param joueurs Les joueurs de la partie. Les objets des joueurs ne sont pas encore attribuÃ©s (c'est au constructeur de le faire).
      */
     public ElementsPartie(Joueur[] joueurs) {
+        this.joueurs = joueurs;
+        this.objets = new Objet[18];
+        this.plateau = new Plateau();
+        this.plateau = plateau.placerPiecesAleatoierment();
 
-        // A ComplÃ©ter
+        nombreJoueurs = 0;
 
     }
 
@@ -72,9 +76,8 @@ public class ElementsPartie {
      * @return Les joueurs de la partie.
      */
     public Joueur[] getJoueurs() {
-        return null; // A Modifier
+        return joueurs;
     }
-
 
     /**
      * A Faire (Quand Qui Statut)
@@ -83,7 +86,8 @@ public class ElementsPartie {
      * @return Les objets de la partie.
      */
     public Objet[] getObjets() {
-        return null; // A Modifier
+
+        return objets;
     }
 
 
@@ -94,7 +98,7 @@ public class ElementsPartie {
      * @return Le plateau de piÃ¨ces.
      */
     public Plateau getPlateau() {
-        return null; // A Modifier
+        return plateau;
     }
 
 
@@ -105,7 +109,7 @@ public class ElementsPartie {
      * @return La piÃ¨ce libre.
      */
     public Piece getPieceLibre() {
-        return null; // A Modifier
+        return pieceLibre;
     }
 
 
@@ -116,7 +120,8 @@ public class ElementsPartie {
      * @return Le nombre de joueurs.
      */
     public int getNombreJoueurs() {
-        return -1; // A Modifier
+
+        return joueurs.length-1;
     }
 
 
