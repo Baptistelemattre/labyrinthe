@@ -1,13 +1,12 @@
 package composants;
 
-import joueurs.JoueurOrdinateur;
 
 /**
  * 
  * Cette classe permet de représenter les pièces du jeu de modèle 1.
  * 
  */
-public abstract class PieceM1 extends JoueurOrdinateur {
+public class PieceM1 extends Piece {
 
 	/**
 	 * Faite le 28/04/2021 par fardoux benoit/lemattre baptiste

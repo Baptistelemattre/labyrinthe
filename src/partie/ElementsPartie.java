@@ -71,25 +71,22 @@ public class ElementsPartie {
         for (int i = 0;i<tabObjet.length;i++){
             objets[i] = tabObjet[tabInt[i]];
         }
-        if (nombreJoueurs <= 2){
+        if (nombreJoueurs >= 2){
             Objet[] tabJ1 = new Objet[nombreObjetParJoueur];
             Objet[] tabJ2 = new Objet[nombreObjetParJoueur];
             for (int i = 0; i<nombreObjetParJoueur;i++){
                 tabJ1[i] = objets[i];
                 tabJ2[i] = objets[i+nombreObjetParJoueur];
             }
+            joueurs[0].setObjetsJoueur(tabJ1);
+            joueurs[1].setObjetsJoueur(tabJ2);
         }
-        if (nombreJoueurs <= 3){
+        if (nombreJoueurs == 3){
             Objet[] tabJ3 = new Objet[nombreObjetParJoueur];
             for (int i = 0; i<nombreObjetParJoueur;i++){
                 tabJ3[i] = objets[i+(nombreObjetParJoueur*(nombreJoueurs-1))];
             }
-        }
-        if (nombreJoueurs == 4){
-            Objet[] tabJ4 = new Objet[nombreObjetParJoueur];
-            for (int i = 0; i<nombreObjetParJoueur;i++){
-                tabJ4[i] = objets[i+(nombreObjetParJoueur*(nombreJoueurs-1))];
-            }
+            joueurs[2].setObjetsJoueur(tabJ3);
         }
         // A ComplÃ©ter
 
