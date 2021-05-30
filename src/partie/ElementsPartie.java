@@ -65,7 +65,11 @@ public class ElementsPartie {
      * MÃ©thode permettant d'attribuer les objets aux diffÃ©rents joueurs de maniÃ¨re alÃ©atoire.
      */
     private void attribuerObjetsAuxJoueurs(){
-
+        int [] tabInt = Utils.genereTabIntAleatoirement(18);
+        Objet[] tabObjet = objets;
+        for (int i = 0;i<tabObjet.length;i++){
+            objets[i] = tabObjet[tabInt[i]];
+        }
         // A ComplÃ©ter
 
     }
