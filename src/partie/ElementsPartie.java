@@ -1,4 +1,4 @@
-package partie;
+package Partie;
 
 import composants.Objet;
 import composants.Piece;
@@ -122,7 +122,7 @@ public class ElementsPartie {
      */
     public int getNombreJoueurs() {
 
-        return joueurs.length-1;
+        return joueurs.length;
     }
 
 
