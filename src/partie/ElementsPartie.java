@@ -43,7 +43,6 @@ public class ElementsPartie {
 
     }
 
-
     /**
      * Un simple constructeur.
      *
