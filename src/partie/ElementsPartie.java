@@ -36,7 +36,7 @@ public class ElementsPartie {
         this.joueurs = joueurs;
         this.objets = new Objet[18];
         this.plateau = new Plateau();
-
+        this.plateau = plateau.placerPiecesAleatoierment();
 
         nombreJoueurs = 0;
 
@@ -121,7 +121,7 @@ public class ElementsPartie {
      */
     public int getNombreJoueurs() {
 
-        return joueurs.length;
+        return joueurs.length-1;
     }
 
 
