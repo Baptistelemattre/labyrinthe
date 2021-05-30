@@ -39,7 +39,7 @@ public class ElementsPartie {
         Plateau plateau=new Plateau();
         Piece pieceLibre=plateau.placerPiecesAleatoierment();
 
-        nombreJoueurs = 0;
+        nombreJoueurs = joueurs.length;
 
     }
 
