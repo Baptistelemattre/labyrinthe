@@ -1,7 +1,4 @@
-package partie;
-
-public class Partie {
-    package partie;
+package Partie;
 
 import composants.Objet;
 import composants.Piece;
@@ -73,4 +70,4 @@ import joueurs.JoueurOrdinateur;
         }
 
     }
-}
+
