@@ -4,6 +4,7 @@ import composants.Objet;
 import composants.Piece;
 import composants.Plateau;
 import composants.Utils;
+import grafix.interfaceGraphique.IG;
 import joueurs.Joueur;
 
 /**
@@ -35,8 +36,8 @@ public class ElementsPartie {
     public ElementsPartie(Joueur[] joueurs) {
         this.joueurs = joueurs;
         this.objets = new Objet[18];
-        this.plateau = new Plateau();
-        this.plateau = plateau.placerPiecesAleatoierment();
+        Plateau plateau=new Plateau();
+        Piece pieceLibre=plateau.placerPiecesAleatoierment();
 
         nombreJoueurs = 0;
 
