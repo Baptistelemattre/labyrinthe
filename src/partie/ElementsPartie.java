@@ -156,7 +156,39 @@ public class ElementsPartie {
      * @param choixEntree L'entrÃ©e choisie pour rÃ©aliser l'insertion (un nombre entre 0 et 27).
      */
     public void insertionPieceLibre(int choixEntree){
-        // A ComplÃ©ter
+        // Debut en haut a gauche vers en haut a droite et de haut en bas
+        if (choixEntree<7){
+            Piece tmp = plateau.getPiece(6,choixEntree);
+            for (int i = 0;i<=6;i++){
+                plateau.positionnePiece(plateau.getPiece(i,choixEntree),i+1,choixEntree);
+            }
+            plateau.positionnePiece(pieceLibre,0,choixEntree);
+            pieceLibre = tmp;
+        }else if ( choixEntree <14){
+            // de haut en bas droite vers la gauche
+            Piece tmp = plateau.getPiece(choixEntree-7,0);
+            for (int i = 6;i>0;i--){
+                plateau.positionnePiece(plateau.getPiece(choixEntree-7,i),choixEntree-7,i-1);
+            }
+            plateau.positionnePiece(pieceLibre,choixEntree-7,0);
+            pieceLibre = tmp;
+        } else if (choixEntree < 21) {
+            // de droite a gauche et de bas en haut
+            Piece tmp = plateau.getPiece(6, choixEntree - 14);
+            for (int i = 6; i > 0; i--) {
+                plateau.positionnePiece(plateau.getPiece(i, choixEntree - 14), i - 1, choixEntree - 14);
+            }
+            plateau.positionnePiece(pieceLibre, 0, choixEntree - 14);
+            pieceLibre = tmp;
+        }else{
+            // bas en haut et de gauche a droite
+            Piece tmp = plateau.getPiece(choixEntree-21,0);
+            for (int i = 0;i<6;i++){
+                plateau.positionnePiece(plateau.getPiece(i,choixEntree),choixEntree-21,i-1);
+            }
+            plateau.positionnePiece(pieceLibre,choixEntree-21,0);
+            pieceLibre = tmp;
+        }
     }
 
 
