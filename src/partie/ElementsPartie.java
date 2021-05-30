@@ -35,11 +35,11 @@ public class ElementsPartie {
      */
     public ElementsPartie(Joueur[] joueurs) {
         this.joueurs = joueurs;
-        this.objets = new Objet[18];
+        objets = Objet.nouveauxObjets();
         Plateau plateau=new Plateau();
-        Piece pieceLibre=plateau.placerPiecesAleatoierment();
+        pieceLibre=plateau.placerPiecesAleatoierment();
 
-        nombreJoueurs = 0;
+        nombreJoueurs = joueurs.length;
 
     }
 
