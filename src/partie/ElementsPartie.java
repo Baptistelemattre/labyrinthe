@@ -173,20 +173,36 @@ public class ElementsPartie {
             plateau.positionnePiece(pieceLibre,choixEntree-7,0);
             pieceLibre = tmp;
         } else if (choixEntree < 21) {
+            int indice =0;
+            if (choixEntree -14 == 0) indice = 7;
+            if (choixEntree -14 == 1) indice = 6;
+            if (choixEntree -14 == 2) indice = 5;
+            if (choixEntree -14 == 3) indice = 4;
+            if (choixEntree -14 == 4) indice = 3;
+            if (choixEntree -14 == 5) indice = 2;
+            if (choixEntree -14 == 6) indice = 1;
             // de droite a gauche et de bas en haut
-            Piece tmp = plateau.getPiece(6, choixEntree - 14);
+            Piece tmp = plateau.getPiece(6, indice);
             for (int i = 6; i > 0; i--) {
-                plateau.positionnePiece(plateau.getPiece(i, choixEntree - 14), i - 1, choixEntree - 14);
+                plateau.positionnePiece(plateau.getPiece(i, indice), i - 1, indice);
             }
-            plateau.positionnePiece(pieceLibre, 0, choixEntree - 14);
+            plateau.positionnePiece(pieceLibre, 0, indice);
             pieceLibre = tmp;
         }else{
+            int indice = 0;
             // bas en haut et de gauche a droite
-            Piece tmp = plateau.getPiece(choixEntree-21,0);
+            if (choixEntree - 21 == 0) indice = 7;
+            if (choixEntree -21 == 1) indice = 6;
+            if (choixEntree -21 == 2) indice = 5;
+            if (choixEntree -21 == 3) indice = 4;
+            if (choixEntree -21 == 4) indice = 3;
+            if (choixEntree -21 == 5) indice = 2;
+            if (choixEntree -21 == 6) indice = 1;
+            Piece tmp = plateau.getPiece(indice,0);
             for (int i = 0;i<6;i++){
-                plateau.positionnePiece(plateau.getPiece(i,choixEntree),choixEntree-21,i-1);
+                plateau.positionnePiece(plateau.getPiece(i,indice),indice,i-1);
             }
-            plateau.positionnePiece(pieceLibre,choixEntree-21,0);
+            plateau.positionnePiece(pieceLibre,indice,0);
             pieceLibre = tmp;
         }
     }
