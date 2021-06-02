@@ -5,25 +5,26 @@ import joueurs.Joueur;
 import partie.ElementsPartie;
 import composants.Objet;
 import composants.Piece;
-import composants.PieceM0;
-import composants.PieceM1;
-import composants.PieceM2;
 import composants.Plateau;
 import grafix.interfaceGraphique.IG;
 
-public class TestElementPartie {
+public class TestElementPartie{
 	public static void main(String[] args){
-	    Object[] parametres;
-	    parametres = IG.saisirParametres();
-	    int nbJoueurs = (Integer) parametres[0];
-	    IG.creerFenetreJeu("Bricodeurs de l'IUT de Lens", nbJoueurs);
-	    IG.rendreVisibleFenetreJeu();
-	    String[] message = {
-	            "",
-	            "",
-	            "Cliquer pour continuer ...",
-	            ""
-	    };
+		Object parametresJeu[];
+		parametresJeu=IG.saisirParametres();
+		int  nbJoueurs=((Integer)parametresJeu[0]).intValue();
+		IG.creerFenetreJeu("- TestElementsPartie",nbJoueurs);
+		Joueur joueurs[]=Joueur.nouveauxJoueurs(parametresJeu);
+		ElementsPartie elementsPartie=new ElementsPartie(joueurs);
+		
+        IG.creerFenetreJeu("Bricodeurs de l'IUT de Lens", nbJoueurs);
+        IG.rendreVisibleFenetreJeu();
+        String[] message = {
+                "",
+                "",
+                "Cliquer pour continuer ...",
+                ""
+        };
 	    IG.afficherMessage(message);
 	    IG.miseAJourAffichage();
 	    IG.attendreClic();
@@ -39,7 +40,7 @@ public class TestElementPartie {
 	    IG.changerPieceHorsPlateau(pieceHorsPlateau.getModelePiece(),pieceHorsPlateau.getOrientationPiece());
 	    IG.miseAJourAffichage();
 	    IG.attendreClic();
-	    Joueur joueurs[]=Joueur.nouveauxJoueurs(parametres);
+	    
 		for (int i=0;i<nbJoueurs;i++) {
 			IG.placerJoueurSurPlateau(i,joueurs[i].getPosLigne(),joueurs[i].getPosColonne());
 			IG.changerImageJoueur(i, joueurs[i].getNumeroImagePersonnage());
@@ -52,7 +53,7 @@ public class TestElementPartie {
 			
 		}
 		
-		int nombreObj=18/nbJoueurs;
+		int nombreObj = 18/nbJoueurs;
 		for(int j = 0; j < nombreObj; j++) {
 			IG.changerObjetJoueur(0,obj[j].getNumeroObjet(),j);
 			IG.changerObjetJoueur(1,obj[j+nombreObj].getNumeroObjet(),j);
@@ -61,8 +62,10 @@ public class TestElementPartie {
 		}
 		IG.miseAJourAffichage();
 		IG.attendreClic();
-	
 		IG.miseAJourAffichage();
+		
+		
+
 	
 	    
 		}
