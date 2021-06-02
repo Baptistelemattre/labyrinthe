@@ -39,7 +39,7 @@ public class TestElementPartie {
 	    IG.changerPieceHorsPlateau(pieceHorsPlateau.getModelePiece(),pieceHorsPlateau.getOrientationPiece());
 	    IG.miseAJourAffichage();
 	    IG.attendreClic();
-	
+	    Joueur joueurs[]=Joueur.nouveauxJoueurs(parametres);
 		for (int i=0;i<nbJoueurs;i++) {
 			IG.placerJoueurSurPlateau(i,joueurs[i].getPosLigne(),joueurs[i].getPosColonne());
 			IG.changerImageJoueur(i, joueurs[i].getNumeroImagePersonnage());
