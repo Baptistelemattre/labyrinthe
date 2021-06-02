@@ -209,15 +209,15 @@ public class ElementsPartie {
             else if (choixEntree -14 == 4) indice = 2;
             else if (choixEntree -14 == 5) indice = 1;
             // de droite a gauche et de bas en haut
-            Piece tmp = plateau.getPiece(6, indice);
+            Piece tmp = plateau.getPiece(0, indice);
             for (int i = 0; i < 6; i++) {
-                plateau.positionnePiece(plateau.getPiece(i, indice), i - 1, indice);
+                plateau.positionnePiece(plateau.getPiece(i+1, indice), i, indice);
             }
             plateau.positionnePiece(pieceLibre, 6, indice);
             pieceLibre = tmp;
             for (int n =1; n<nombreJoueurs;n++){
-                if (joueurs[n].getPosColonne()==indice && joueurs[n].getPosLigne()==6){
-                    joueurs[n].setPosition(0, joueurs[n].getPosColonne());
+                if (joueurs[n].getPosColonne()==indice && joueurs[n].getPosLigne()==0){
+                    joueurs[n].setPosition(6, joueurs[n].getPosColonne());
                 }else if (joueurs[n].getPosColonne()==indice){
                     joueurs[n].setPosition(joueurs[n].getPosLigne()-1, indice);
                 }
