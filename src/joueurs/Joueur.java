@@ -179,7 +179,7 @@ public abstract class Joueur {
 	 */
 	public Objet getProchainObjet(){
 		if (nombreObjetsRecuperes!=objetsJoueur.length){
-			return objetsJoueur[nombreObjetsRecuperes+1];
+			return objetsJoueur[nombreObjetsRecuperes];
 		}
 		return null; // A Modifier
 	}

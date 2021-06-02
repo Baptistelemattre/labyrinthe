@@ -124,7 +124,9 @@ import joueurs.JoueurOrdinateur;
 		        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(),elementsPartie.getPieceLibre().getOrientationPiece());
 		        		
 		        		for(int j=0;j<18;j++) {
-		        			IG.placerObjetPlateau(elementsPartie.getObjets()[j].getNumeroObjet(), elementsPartie.getObjets()[j].getPosLignePlateau(),elementsPartie.getObjets()[j].getPosColonnePlateau());
+		        			if(elementsPartie.getObjets()[j].surPlateau()) {
+		        				IG.placerObjetPlateau(elementsPartie.getObjets()[j].getNumeroObjet(), elementsPartie.getObjets()[j].getPosLignePlateau(),elementsPartie.getObjets()[j].getPosColonnePlateau());
+		        			}
 		        		}
 		        		
 		        		IG.miseAJourAffichage();
@@ -173,14 +175,12 @@ import joueurs.JoueurOrdinateur;
 	            	
 	            	
 	            	//Verification si le joueur est sur un objet, si oui l'enleve du plateau et confirme qu'il a trouve l'objet
-		            	for(int j=0;j<elementsPartie.getJoueurs()[i].getObjetsJoueur().length;j++) {
-		            		if( elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau() == posJoueur[0] && elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau() == posJoueur[1] && elementsPartie.getJoueurs()[i].getProchainObjet() == elementsPartie.getJoueurs()[i].getObjetsJoueur()[j])  {//Vérification si Joueur sur un de ces objets
-		            			IG.enleverObjetPlateau(elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau(), elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau());
-		            			elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].enleveDuPlateau();
-		            			elementsPartie.getJoueurs()[i].recupererObjet();
-		            			IG.changerObjetJoueurAvecTransparence(i, elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getNumeroObjet(), j);
-		            			break;
-		            		}
+		            	Objet objet = elementsPartie.getJoueurs()[i].getProchainObjet();
+		            	if(objet.getPosLignePlateau() == posJoueur[0] && objet.getPosColonnePlateau() == posJoueur[1]) {
+	            			IG.enleverObjetPlateau(objet.getPosLignePlateau(), objet.getPosColonnePlateau());
+	            			objet.enleveDuPlateau();
+	            			IG.changerObjetJoueurAvecTransparence(i, objet.getNumeroObjet(), elementsPartie.getJoueurs()[i].getNombreObjetsRecuperes());
+	            			elementsPartie.getJoueurs()[i].recupererObjet();
 		            	}
 		            	IG.miseAJourAffichage();
 		            	

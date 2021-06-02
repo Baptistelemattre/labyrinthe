@@ -24,7 +24,7 @@ public class Objet {
 		this.numObjet = numObjet;
 		posLignePlateau = -1;
 		posColonnePlateau = -1;
-		surPlateau = false;
+		surPlateau = true;
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class Objet {
 	 * @return true si l'objet est sur le plateau, false sinon.
 	 */
 	public boolean surPlateau() {
-		return posColonnePlateau == -1 && posLignePlateau == -1;// A Modifier
+		return surPlateau;// A Modifier
 	}
 
 	/**
