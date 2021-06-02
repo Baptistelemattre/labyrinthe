@@ -195,8 +195,8 @@ public class ElementsPartie {
             }
             for (Objet objet : objets) {
                 if (objet.getPosLignePlateau() == choixEntree - 7 && objet.getPosColonnePlateau() == 0) {
-                    objet.positionneObjet(objet.getPosColonnePlateau(), 6);
-                } else if (objet.getPosColonnePlateau() == choixEntree - 7) {
+                    objet.positionneObjet(choixEntree - 7, 6);
+                } else if (objet.getPosLignePlateau() == choixEntree - 7) {
                     objet.positionneObjet(choixEntree - 7, objet.getPosColonnePlateau() - 1);
                 }
             }
@@ -210,7 +210,7 @@ public class ElementsPartie {
             else if (choixEntree -14 == 5) indice = 1;
             // de droite a gauche et de bas en haut
             Piece tmp = plateau.getPiece(6, indice);
-            for (int i = 6; i > 0; i--) {
+            for (int i = 0; i < 6; i++) {
                 plateau.positionnePiece(plateau.getPiece(i, indice), i - 1, indice);
             }
             plateau.positionnePiece(pieceLibre, 6, indice);
