@@ -15,7 +15,7 @@ import joueurs.JoueurOrdinateur;
 
         /**
          *
-         * A Faire (Quand Qui Statut)
+         * A Faire (Quand Qui Statut) 02/05/2021 Victor Fini
          *
          * Constructeur permettant de crÃ©er et d'initialiser une nouvelle partie.
          */
@@ -80,7 +80,7 @@ import joueurs.JoueurOrdinateur;
 
         /**
          *
-         * A Faire (Quand Qui Statut)
+         * A Faire (Quand Qui Statut) 02/05/2021 Victor Fini
          *
          * MÃ©thode permettant de lancer une partie.
          */
@@ -185,7 +185,7 @@ import joueurs.JoueurOrdinateur;
 		            	IG.miseAJourAffichage();
 		            	
 	            	//Verification si le joueur a gagner
-		            	if(elementsPartie.getJoueurs()[i].getNombreObjetsRecuperes() == 18/elementsPartie.getNombreJoueurs()) {
+		            	if(elementsPartie.getJoueurs()[i].getNombreObjetsRecuperes() == 18/elementsPartie.getNombreJoueurs() || elementsPartie.getJoueurs()[i].getProchainObjet() == null) {
 		            		IG.afficherGagnant(i);
 		                    String[] messageEnd = {
 		                            "",
