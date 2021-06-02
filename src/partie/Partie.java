@@ -1,7 +1,5 @@
 package partie;
 
-
-
 import composants.Objet;
 import composants.Piece;
 import composants.Plateau;
@@ -26,6 +24,38 @@ import joueurs.JoueurOrdinateur;
             parametrerEtInitialiser();
 
             // On affiche l'ensemble des Ã©lÃ©ments
+            
+            
+            //Places les pieces du jeux
+    		for (int i=0;i<7;i++) { 
+    			for (int j=0;j<7;j++) {
+    				IG.changerPiecePlateau(i,j,elementsPartie.getPlateau().getPiece(i,j).getModelePiece(),elementsPartie.getPlateau().getPiece(i, j).getOrientationPiece());
+    				}
+    			}
+    		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(),elementsPartie.getPieceLibre().getOrientationPiece());
+    		
+    		//Places les objets sur le plateau
+    		for(int i=0;i<18;i++) {
+    			IG.placerObjetPlateau(elementsPartie.getObjets()[i].getNumeroObjet(), elementsPartie.getObjets()[i].getPosLignePlateau(),elementsPartie.getObjets()[i].getPosColonnePlateau());
+    		}
+    		
+    		//Donnes les objets aux joueurs
+    		for(int i=0;i<18/elementsPartie.getNombreJoueurs();i++) {
+    			IG.changerObjetJoueur(0, elementsPartie.getJoueurs()[0].getObjetsJoueur()[i].getNumeroObjet(), i);
+    			IG.changerObjetJoueur(1, elementsPartie.getJoueurs()[1].getObjetsJoueur()[i].getNumeroObjet(), i);
+    			if(elementsPartie.getNombreJoueurs() == 3) {
+    				IG.changerObjetJoueur(2, elementsPartie.getJoueurs()[2].getObjetsJoueur()[i].getNumeroObjet(), i);
+    			}
+    		}
+    		
+    		//Places les joueurs sur le plateau
+            for (int i = 0; i < elementsPartie.getNombreJoueurs(); i++) {
+            	IG.changerNomJoueur(i, elementsPartie.getJoueurs()[i].getNomJoueur() + " (" + elementsPartie.getJoueurs()[i].getCategorie() + ")");
+            	IG.changerImageJoueur(i, elementsPartie.getJoueurs()[i].getNumeroImagePersonnage());
+            	IG.placerJoueurSurPlateau(i, elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne());
+            }
+    		
+            IG.miseAJourAffichage();
 
             // A ComplÃ©ter
 
@@ -55,7 +85,98 @@ import joueurs.JoueurOrdinateur;
          * MÃ©thode permettant de lancer une partie.
          */
         public void lancer(){
+        	boolean win = false;
             // A ComplÃ©ter
+        	while(!win) {
+	        	for (int i = 0; i < elementsPartie.getNombreJoueurs(); i++) {
+	        		
+	        		
+	        		//Demande au joueurs, de modifier l'orientation et de donner une entr�e
+	        		int[] rep;
+	        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
+	        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
+	        		}
+	        		else {
+	        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(null);
+	        		}
+	        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
+	        		elementsPartie.insertionPieceLibre(rep[1]);
+	        		IG.miseAJourAffichage();
+	        		
+	        		
+	            	//Demande au Joueurs, si ils sont humain un chemin a prendre.
+	            	int[] posJoueur = new int[2];
+	            	int[][] cheminPris;
+	            	int[][] cheminPrisFinal;
+	            	do {
+	            		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
+	            			posJoueur = elementsPartie.getJoueurs()[i].choisirCaseArrivee(elementsPartie);        			
+	            		}
+	            		else {
+	                        String[] messageTurn = {
+	                                "",
+	                                "Au tour de " + (String)elementsPartie.getJoueurs()[i].getNomJoueur(),
+	                                "S�lectionner une case ...",
+	                                ""
+	                        };
+	                        IG.afficherMessage(messageTurn);
+	                        IG.miseAJourAffichage();
+	            			posJoueur = elementsPartie.getJoueurs()[i].choisirCaseArrivee(null);
+	            			
+	            		}
+	            		cheminPris = elementsPartie.getPlateau().calculeChemin(elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne(), posJoueur[0], posJoueur[1]);
+	            	}while(cheminPris == null);
+	            	//Marque le chemin pris par le Joueur.
+	            	cheminPrisFinal =  elementsPartie.getPlateau().calculeCheminDetaille(cheminPris, i);
+	            	for(int n = 0; n < cheminPrisFinal.length; n++) {
+	            		IG.placerBilleSurPlateau(cheminPrisFinal[n][0], cheminPrisFinal[n][1], cheminPrisFinal[n][2], cheminPrisFinal[n][3], i);
+	            	}
+	            	IG.placerJoueurSurPlateau(i,posJoueur[0] , posJoueur[1]);
+	            	elementsPartie.getJoueurs()[i].setPosition(posJoueur[0], posJoueur[1]);
+	            	IG.miseAJourAffichage();
+	            	
+	            	
+	            	//Detruit le chemin petit � petit
+	            	for(int x=0;x<cheminPrisFinal.length;x++) {
+	
+	            		IG.supprimerBilleSurPlateau(cheminPrisFinal[x][0], cheminPrisFinal[x][1], cheminPrisFinal[x][2], cheminPrisFinal[x][3]);
+	            		IG.miseAJourAffichage();
+	            	}
+	            	
+	            	
+	            	
+	            	//Verification si le joueur est sur un objet, si oui l'enleve du plateau et confirme qu'il a trouve l'objet
+	            	for(int j=0;j<elementsPartie.getJoueurs()[i].getObjetsJoueur().length;j++) {
+	            		if( elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau() == posJoueur[0] && elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau() == posJoueur[1] )  {//V�rification si Joueur sur un de ces objets
+	            			IG.enleverObjetPlateau(elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau(), elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau());
+	            			elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].enleveDuPlateau();
+	            			elementsPartie.getJoueurs()[i].recupererObjet();
+	            			IG.changerObjetJoueurAvecTransparence(i, elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getNumeroObjet(), j);
+	            			break;
+	            		}
+	            	}
+	            	IG.miseAJourAffichage();
+	            	
+	            	//Verification si le joueur a gagner
+	            	if(elementsPartie.getJoueurs()[i].getNombreObjetsRecuperes() == 18/elementsPartie.getNombreJoueurs()) {
+	            		IG.afficherGagnant(i);
+	                    String[] messageEnd = {
+	                            "",
+	                            (String)elementsPartie.getJoueurs()[i].getNomJoueur() + " a gagne !!",
+	                            "Cliquer pour quitter",
+	                            ""
+	                    };
+	                    IG.afficherMessage(messageEnd);
+	                    IG.miseAJourAffichage();
+	                    IG.attendreClic();
+	                    IG.fermerFenetreJeu();
+	                    win = true;
+	            	}
+	            	
+	            	
+	            	
+	            }
+        	}
         }
 
         /**
