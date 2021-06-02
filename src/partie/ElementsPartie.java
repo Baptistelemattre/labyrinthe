@@ -58,6 +58,7 @@ public class ElementsPartie {
         this.objets=objets;
         this.plateau=plateau;
         this.pieceLibre=pieceLibre;
+        attribuerObjetsAuxJoueurs();
     }
 
     /**
