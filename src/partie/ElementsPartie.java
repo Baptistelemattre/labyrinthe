@@ -161,7 +161,7 @@ public class ElementsPartie {
         // Debut en haut a gauche vers en haut a droite et de haut en bas
         if (choixEntree<7){
             Piece tmp = plateau.getPiece(6,choixEntree);
-            for (int i = 0;i<=6;i++){
+            for (int i = 0;i<6;i++){
                 plateau.positionnePiece(plateau.getPiece(i,choixEntree),i+1,choixEntree);
             }
             plateau.positionnePiece(pieceLibre,0,choixEntree);
@@ -217,7 +217,7 @@ public class ElementsPartie {
             }
             plateau.positionnePiece(pieceLibre, 6, indice);
             pieceLibre = tmp;
-            for (int n =0; n<nombreJoueurs;n++){
+            for (int n =1; n<nombreJoueurs;n++){
                 if (joueurs[n].getPosColonne()==indice && joueurs[n].getPosLigne()==6){
                     joueurs[n].setPosition(0, joueurs[n].getPosColonne());
                 }else if (joueurs[n].getPosColonne()==indice){
@@ -241,7 +241,7 @@ public class ElementsPartie {
             else if (choixEntree - 21 == 5) indice = 1;
             Piece tmp = plateau.getPiece(indice, 0);
             for (int i = 0; i < 6; i++) {
-                plateau.positionnePiece(plateau.getPiece(i, indice), indice, i - 1);
+                plateau.positionnePiece(plateau.getPiece(i, indice), indice, i + 1);
             }
             plateau.positionnePiece(pieceLibre, indice, 0);
             pieceLibre = tmp;
