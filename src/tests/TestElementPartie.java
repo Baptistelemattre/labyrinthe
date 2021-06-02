@@ -97,6 +97,5 @@ public class TestElementPartie {
         IG.miseAJourAffichage();
         IG.attendreClic();
         System.exit(0);
-
     }
 }
