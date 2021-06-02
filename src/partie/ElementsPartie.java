@@ -181,12 +181,11 @@ public class ElementsPartie {
             }
         }else if ( choixEntree <14){
             // de haut en bas droite vers la gauche
-            Piece tmp = plateau.getPiece(choixEntree-7,0);
-            for (int i = 6;i>0;i--){
+            for (int i = 1;i<7;i++){
                 plateau.positionnePiece(plateau.getPiece(choixEntree-7,i),choixEntree-7,i-1);
             }
-            plateau.positionnePiece(pieceLibre,choixEntree-7,0);
-            pieceLibre = tmp;
+            plateau.positionnePiece(pieceLibre,choixEntree-7,6);
+        	pieceLibre = plateau.getPiece(choixEntree-7,0);
             for (int n =0; n<nombreJoueurs;n++){
                 if (joueurs[n].getPosLigne()==choixEntree-7 && joueurs[n].getPosColonne()==0){
                     joueurs[n].setPosition(joueurs[n].getPosLigne(), 6);

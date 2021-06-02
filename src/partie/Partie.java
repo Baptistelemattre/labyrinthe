@@ -90,7 +90,14 @@ import joueurs.JoueurOrdinateur;
         	while(!win) {
 	        	for (int i = 0; i < elementsPartie.getNombreJoueurs(); i++) {
 	        		
-	        		
+                    String[] messageInit = {
+                            "",
+                            "Au tour de " + (String)elementsPartie.getJoueurs()[i].getNomJoueur(),
+                            "Selectionner une fleche et",
+                            "modifier la rotation"
+                    };
+	        		IG.afficherMessage(messageInit);
+	        		IG.miseAJourAffichage();
 	        		//Demande au joueurs, de modifier l'orientation et de donner une entrée
 	        		int[] rep;
 	        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
@@ -101,8 +108,9 @@ import joueurs.JoueurOrdinateur;
 	        		}
 	        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
 	        		elementsPartie.insertionPieceLibre(rep[1]);
-	        		IG.placerJoueurSurPlateau(i, elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne());
 	        		
+	        		//Remodifie la position des elements post-insertion
+	        		IG.placerJoueurSurPlateau(i, elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne());
 	        		for (int n=0;n<7;n++) { 
 	        			for (int j=0;j<7;j++) {
 	        				IG.changerPiecePlateau(n,j,elementsPartie.getPlateau().getPiece(n,j).getModelePiece(),elementsPartie.getPlateau().getPiece(n, j).getOrientationPiece());
@@ -130,7 +138,7 @@ import joueurs.JoueurOrdinateur;
 	                        String[] messageTurn = {
 	                                "",
 	                                "Au tour de " + (String)elementsPartie.getJoueurs()[i].getNomJoueur(),
-	                                "Sï¿½lectionner une case ...",
+	                                "Selectionner une case ...",
 	                                ""
 	                        };
 	                        IG.afficherMessage(messageTurn);
@@ -140,6 +148,7 @@ import joueurs.JoueurOrdinateur;
 	            		}
 	            		cheminPris = elementsPartie.getPlateau().calculeChemin(elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne(), posJoueur[0], posJoueur[1]);
 	            	}while(cheminPris == null);
+	            	
 	            	//Marque le chemin pris par le Joueur.
 	            	cheminPrisFinal =  elementsPartie.getPlateau().calculeCheminDetaille(cheminPris, i);
 	            	for(int n = 0; n < cheminPrisFinal.length; n++) {
@@ -161,7 +170,7 @@ import joueurs.JoueurOrdinateur;
 	            	
 	            	//Verification si le joueur est sur un objet, si oui l'enleve du plateau et confirme qu'il a trouve l'objet
 	            	for(int j=0;j<elementsPartie.getJoueurs()[i].getObjetsJoueur().length;j++) {
-	            		if( elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau() == posJoueur[0] && elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau() == posJoueur[1] )  {//Vérification si Joueur sur un de ces objets
+	            		if( elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau() == posJoueur[0] && elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau() == posJoueur[1] && elementsPartie.getJoueurs()[i].getProchainObjet() == elementsPartie.getJoueurs()[i].getObjetsJoueur()[j])  {//Vérification si Joueur sur un de ces objets
 	            			IG.enleverObjetPlateau(elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosLignePlateau(), elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].getPosColonnePlateau());
 	            			elementsPartie.getJoueurs()[i].getObjetsJoueur()[j].enleveDuPlateau();
 	            			elementsPartie.getJoueurs()[i].recupererObjet();
@@ -186,10 +195,7 @@ import joueurs.JoueurOrdinateur;
 	                    IG.fermerFenetreJeu();
 	                    win = true;
 	            	}
-	            	
-	            	
-	            	
-	            }
+	        	}
         	}
         }
 
