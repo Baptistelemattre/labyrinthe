@@ -173,11 +173,11 @@ public class ElementsPartie {
                     joueurs[n].setPosition(joueurs[n].getPosLigne()+1, choixEntree);
                 }
             }
-            for (int n =0; n< objets.length;n++) {
-                if (objets[n].getPosColonnePlateau() == choixEntree && objets[n].getPosLignePlateau() == 6) {
-                    objets[n].positionneObjet(0, objets[n].getPosColonnePlateau());
-                } else if (objets[n].getPosColonnePlateau() == choixEntree) {
-                    joueurs[n].setPosition(joueurs[n].getPosLigne() + 1, choixEntree);
+            for (Objet objet : objets) {
+                if (objet.getPosColonnePlateau() == choixEntree && objet.getPosLignePlateau() == 6) {
+                    objet.positionneObjet(0, objet.getPosColonnePlateau());
+                } else if (objet.getPosColonnePlateau() == choixEntree) {
+                    objet.positionneObjet(objet.getPosLignePlateau() + 1, choixEntree);
                 }
             }
         }else if ( choixEntree <14){
@@ -195,11 +195,11 @@ public class ElementsPartie {
                     joueurs[n].setPosition(choixEntree - 7, joueurs[n].getPosColonne() - 1);
                 }
             }
-            for (int n =0; n< objets.length;n++) {
-                if (objets[n].getPosLignePlateau() == choixEntree-7 && objets[n].getPosColonnePlateau() == 0) {
-                    objets[n].positionneObjet(objets[n].getPosColonnePlateau(),6);
-                } else if (objets[n].getPosColonnePlateau() == choixEntree-7) {
-                    joueurs[n].setPosition(choixEntree-7,joueurs[n].getPosColonne() - 1);
+            for (Objet objet : objets) {
+                if (objet.getPosLignePlateau() == choixEntree - 7 && objet.getPosColonnePlateau() == 0) {
+                    objet.positionneObjet(objet.getPosColonnePlateau(), 6);
+                } else if (objet.getPosColonnePlateau() == choixEntree - 7) {
+                    objet.positionneObjet(choixEntree - 7, objet.getPosColonnePlateau() - 1);
                 }
             }
 
@@ -224,11 +224,11 @@ public class ElementsPartie {
                     joueurs[n].setPosition(joueurs[n].getPosLigne()-1, indice);
                 }
             }
-            for (int n =0; n< objets.length;n++){
-                if (objets[n].getPosColonnePlateau()==indice && objets[n].getPosLignePlateau()==6){
-                    objets[n].positionneObjet(0, objets[n].getPosColonnePlateau());
-                }else if (objets[n].getPosColonnePlateau()==indice){
-                    joueurs[n].setPosition(joueurs[n].getPosLigne()-1, indice);
+            for (Objet objet : objets) {
+                if (objet.getPosColonnePlateau() == indice && objet.getPosLignePlateau() == 6) {
+                    objet.positionneObjet(0, objet.getPosColonnePlateau());
+                } else if (objet.getPosColonnePlateau() == indice) {
+                    objet.positionneObjet(objet.getPosLignePlateau() - 1, indice);
                 }
             }
         }else {
@@ -252,11 +252,11 @@ public class ElementsPartie {
                     joueurs[n].setPosition(indice, joueurs[n].getPosColonne() + 1);
                 }
             }
-            for (int n = 0; n < objets.length; n++) {
-                if (objets[n].getPosColonnePlateau() == indice && objets[n].getPosColonnePlateau() == 6) {
-                    objets[n].positionneObjet(0, objets[n].getPosColonnePlateau());
-                } else if (objets[n].getPosColonnePlateau() == indice) {
-                    joueurs[n].setPosition(indice, joueurs[n].getPosColonne() + 1);
+            for (Objet objet : objets) {
+                if (objet.getPosColonnePlateau() == indice && objet.getPosColonnePlateau() == 6) {
+                    objet.positionneObjet(0, objet.getPosColonnePlateau());
+                } else if (objet.getPosColonnePlateau() == indice) {
+                    objet.positionneObjet(indice, objet.getPosColonnePlateau() + 1);
                 }
             }
         }
