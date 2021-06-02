@@ -101,6 +101,20 @@ import joueurs.JoueurOrdinateur;
 	        		}
 	        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
 	        		elementsPartie.insertionPieceLibre(rep[1]);
+	        		IG.placerJoueurSurPlateau(i, elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne());
+	        		
+	        		for (int n=0;n<7;n++) { 
+	        			for (int j=0;j<7;j++) {
+	        				IG.changerPiecePlateau(n,j,elementsPartie.getPlateau().getPiece(n,j).getModelePiece(),elementsPartie.getPlateau().getPiece(n, j).getOrientationPiece());
+	        				IG.enleverObjetPlateau(n, j);
+	        			}
+	        		}
+	        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(),elementsPartie.getPieceLibre().getOrientationPiece());
+	        		
+	        		for(int j=0;j<18;j++) {
+	        			IG.placerObjetPlateau(elementsPartie.getObjets()[j].getNumeroObjet(), elementsPartie.getObjets()[j].getPosLignePlateau(),elementsPartie.getObjets()[j].getPosColonnePlateau());
+	        		}
+	        		
 	        		IG.miseAJourAffichage();
 	        		
 	        		

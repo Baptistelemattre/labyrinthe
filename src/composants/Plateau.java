@@ -33,9 +33,6 @@ public class Plateau {
 	public void positionnePiece(Piece piece,int lignePlateau,int colonnePlateau){
 		// A ComplÃ©ter
 		plateau[lignePlateau][colonnePlateau] = piece;
-
-		System.out.println(plateau[lignePlateau][colonnePlateau].getPointEntree(0) +" "+ plateau[lignePlateau][colonnePlateau].getPointEntree(1) + plateau[lignePlateau][colonnePlateau].getPointEntree(2) + plateau[lignePlateau][colonnePlateau].getPointEntree(3));
-
 	}
 
 	/**
