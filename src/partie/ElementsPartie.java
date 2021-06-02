@@ -160,12 +160,11 @@ public class ElementsPartie {
     public void insertionPieceLibre(int choixEntree){
         // Debut en haut a gauche vers en haut a droite et de haut en bas
         if (choixEntree<7){
-            Piece tmp = plateau.getPiece(6,choixEntree);
-            for (int i = 0;i<6;i++){
-                plateau.positionnePiece(plateau.getPiece(i,choixEntree),i+1,choixEntree);
+        	pieceLibre = plateau.getPiece(6,choixEntree);
+            for (int i = 6;i>0;i--){
+                plateau.positionnePiece(plateau.getPiece(i-1,choixEntree),i,choixEntree);
             }
             plateau.positionnePiece(pieceLibre,0,choixEntree);
-            pieceLibre = tmp;
             for (int n =0; n<nombreJoueurs;n++){
                 if (joueurs[n].getPosColonne()==choixEntree && joueurs[n].getPosLigne()==6){
                     joueurs[n].setPosition(0, joueurs[n].getPosColonne());
@@ -182,12 +181,11 @@ public class ElementsPartie {
             }
         }else if ( choixEntree <14){
             // de haut en bas droite vers la gauche
-            Piece tmp = plateau.getPiece(choixEntree-7,0);
-            for (int i = 6;i>0;i--){
+            for (int i = 1;i<7;i++){
                 plateau.positionnePiece(plateau.getPiece(choixEntree-7,i),choixEntree-7,i-1);
             }
-            plateau.positionnePiece(pieceLibre,choixEntree-7,0);
-            pieceLibre = tmp;
+            plateau.positionnePiece(pieceLibre,choixEntree-7,6);
+        	pieceLibre = plateau.getPiece(choixEntree-7,0);
             for (int n =0; n<nombreJoueurs;n++){
                 if (joueurs[n].getPosLigne()==choixEntree-7 && joueurs[n].getPosColonne()==0){
                     joueurs[n].setPosition(joueurs[n].getPosLigne(), 6);
@@ -197,69 +195,60 @@ public class ElementsPartie {
             }
             for (Objet objet : objets) {
                 if (objet.getPosLignePlateau() == choixEntree - 7 && objet.getPosColonnePlateau() == 0) {
-                    objet.positionneObjet(objet.getPosColonnePlateau(), 6);
-                } else if (objet.getPosColonnePlateau() == choixEntree - 7) {
+                    objet.positionneObjet(choixEntree - 7, 6);
+                } else if (objet.getPosLignePlateau() == choixEntree - 7) {
                     objet.positionneObjet(choixEntree - 7, objet.getPosColonnePlateau() - 1);
                 }
             }
 
         } else if (choixEntree < 21) {
-            int indice =0;
-            if (choixEntree -14 == 0) indice = 6;
-            else if (choixEntree -14 == 1) indice = 5;
-            else if (choixEntree -14 == 2) indice = 4;
-            else if (choixEntree -14 == 4) indice = 2;
-            else if (choixEntree -14 == 5) indice = 1;
+            int indice = 20 - choixEntree;
             // de droite a gauche et de bas en haut
-            Piece tmp = plateau.getPiece(6, indice);
-            for (int i = 6; i > 0; i--) {
-                plateau.positionnePiece(plateau.getPiece(i, indice), i - 1, indice);
+            Piece tmp = plateau.getPiece(0, indice);
+            for (int i = 0; i < 6; i++) {
+                plateau.positionnePiece(plateau.getPiece(i+1, indice), i, indice);
             }
             plateau.positionnePiece(pieceLibre, 6, indice);
             pieceLibre = tmp;
-            for (int n =1; n<nombreJoueurs;n++){
-                if (joueurs[n].getPosColonne()==indice && joueurs[n].getPosLigne()==6){
-                    joueurs[n].setPosition(0, joueurs[n].getPosColonne());
+            for (int n =0; n<nombreJoueurs;n++){
+                if (joueurs[n].getPosColonne()==indice && joueurs[n].getPosLigne()==0){
+                    joueurs[n].setPosition(6, joueurs[n].getPosColonne());
                 }else if (joueurs[n].getPosColonne()==indice){
                     joueurs[n].setPosition(joueurs[n].getPosLigne()-1, indice);
                 }
             }
             for (Objet objet : objets) {
-                if (objet.getPosColonnePlateau() == indice && objet.getPosLignePlateau() == 6) {
-                    objet.positionneObjet(0, objet.getPosColonnePlateau());
+                if (objet.getPosColonnePlateau() == indice && objet.getPosLignePlateau() == 0) {
+                    objet.positionneObjet(6, objet.getPosColonnePlateau());
                 } else if (objet.getPosColonnePlateau() == indice) {
                     objet.positionneObjet(objet.getPosLignePlateau() - 1, indice);
                 }
             }
         }else {
-            int indice = 0;
+            int indice = 27-choixEntree;
             // bas en haut et de gauche a droite
-            if (choixEntree - 21 == 0) indice = 6;
-            else if (choixEntree - 21 == 1) indice = 5;
-            else if (choixEntree - 21 == 2) indice = 4;
-            else if (choixEntree - 21 == 4) indice = 2;
-            else if (choixEntree - 21 == 5) indice = 1;
-            Piece tmp = plateau.getPiece(indice, 0);
-            for (int i = 0; i < 6; i++) {
-                plateau.positionnePiece(plateau.getPiece(i, indice), indice, i + 1);
+            Piece tmp = plateau.getPiece(indice, 6);
+            for (int i = 6; i > 0; i--) {
+                plateau.positionnePiece(plateau.getPiece(indice, i-1), indice, i);
             }
             plateau.positionnePiece(pieceLibre, indice, 0);
             pieceLibre = tmp;
             for (int n = 0; n < nombreJoueurs; n++) {
-                if (joueurs[n].getPosColonne() == indice && joueurs[n].getPosLigne() == 6) {
-                    joueurs[n].setPosition(joueurs[n].getPosLigne(), 0);
+                if (joueurs[n].getPosLigne() == indice && joueurs[n].getPosColonne() == 6) {
+                    joueurs[n].setPosition(indice, 0);
                 } else if (joueurs[n].getPosLigne() == indice) {
                     joueurs[n].setPosition(indice, joueurs[n].getPosColonne() + 1);
                 }
             }
             for (Objet objet : objets) {
-                if (objet.getPosColonnePlateau() == indice && objet.getPosColonnePlateau() == 6) {
-                    objet.positionneObjet(0, objet.getPosColonnePlateau());
-                } else if (objet.getPosColonnePlateau() == indice) {
+                if (objet.getPosLignePlateau() == indice && objet.getPosColonnePlateau() == 6) {
+                    objet.positionneObjet(objet.getPosLignePlateau(), 0);
+                } else if (objet.getPosLignePlateau() == indice) {
                     objet.positionneObjet(indice, objet.getPosColonnePlateau() + 1);
                 }
             }
         }
+        
 
     }
 
