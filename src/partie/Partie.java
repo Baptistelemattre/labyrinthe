@@ -97,11 +97,14 @@ import joueurs.JoueurOrdinateur;
                             "modifier la rotation"
                     };
 	        		IG.afficherMessage(messageInit);
+					IG.changerObjetSelectionne(elementsPartie.getJoueurs()[i].getProchainObjet().getNumeroObjet());
+					IG.changerJoueurSelectionne(i);
 	        		IG.miseAJourAffichage();
 	        		
-	        		//Demande au joueurs, de modifier l'orientation et de donner une entrée
+	        		//Demande au joueurs, de modifier l'orientation et de donner une entrï¿½e
 		        		int[] rep;
 		        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
+		        			IG.pause(500);
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
 		        		}
 		        		else {
@@ -109,7 +112,6 @@ import joueurs.JoueurOrdinateur;
 		        		}
 		        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
 		        		elementsPartie.insertionPieceLibre(rep[1]);
-	        		
 	        		//Remodifie la position des elements post-insertion
 		        		for(int n=0;n<elementsPartie.getNombreJoueurs();n++) {
 			        		IG.placerJoueurSurPlateau(n, elementsPartie.getJoueurs()[n].getPosLigne(), elementsPartie.getJoueurs()[n].getPosColonne());
@@ -165,7 +167,7 @@ import joueurs.JoueurOrdinateur;
 		            	IG.miseAJourAffichage();
 	            	
 	            	
-	            	//Detruit le chemin petit à petit
+	            	//Detruit le chemin petit ï¿½ petit
 		            	for(int x=0;x<cheminPrisFinal.length;x++) {
 		
 		            		IG.supprimerBilleSurPlateau(cheminPrisFinal[x][0], cheminPrisFinal[x][1], cheminPrisFinal[x][2], cheminPrisFinal[x][3]);
