@@ -133,7 +133,8 @@ public class Plateau {
 	}
 
 	
-	private int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceNonVisitee) { //Changer en nombre d'entrï¿½es possible actuelle vers de nouvelles cases
+	// Calcul le nombre de passage possible par rapport au chemin déjà emprunter.
+	public int nbPassagePossible(int ligActuelle,int colActuelle, boolean[][] pieceNonVisitee) { //Changer en nombre d'entrï¿½es possible actuelle vers de nouvelles cases
 		int nbEntrees = 0;
 		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle) && pieceNonVisitee[ligActuelle-1][colActuelle])  {
 			nbEntrees = nbEntrees + 1;
@@ -154,6 +155,27 @@ public class Plateau {
 		return nbEntrees;
 	}
 	
+	//Calcul le nombre de chemin possible depuis une case précise.
+	public int nbPassagePossiblePiece(int ligActuelle,int colActuelle) { //Changer en nombre d'entrï¿½es possible actuelle vers de nouvelles cases
+		int nbEntrees = 0;
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle-1, colActuelle))  {
+			nbEntrees = nbEntrees + 1;
+
+		}
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle-1)) {
+			nbEntrees = nbEntrees + 1;
+
+		}
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle+1, colActuelle)) {
+			nbEntrees = nbEntrees + 1;
+
+		}
+		if(passageEntreCases(ligActuelle, colActuelle, ligActuelle, colActuelle+1)) {
+			nbEntrees = nbEntrees + 1;
+
+		}
+		return nbEntrees;
+	}
 	
 	
 	
