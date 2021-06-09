@@ -55,7 +55,7 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         }
         System.out.println("coucou");
         // verifier s'il est plus proche par les colonnes ou par les lignes et retourne ce qui devrait déranger le plus un joueur
-        if (joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne()< joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne()){
+        if (Math.abs( joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne() )< Math.abs( joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne() )){
             result[1] = joueurTmp.getPosLigne();
         }else{
         	result[1] = joueurTmp.getPosColonne()+7;

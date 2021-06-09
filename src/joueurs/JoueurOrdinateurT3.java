@@ -103,7 +103,7 @@ public class JoueurOrdinateurT3 extends JoueurOrdinateur {
             if (!(i.equals(this)) && distanceTmp > i.distanceAvecSonObjet()) {
                 distanceTmp = i.distanceAvecSonObjet();
                 joueurTmp = i;
-                if (joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne()< joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne()){
+                if (Math.abs( joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne() )< Math.abs( joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne() )){
                     result[1] = joueurTmp.getPosLigne();
                 	result[0] = Utils.genererEntier(3);
                     return result;
