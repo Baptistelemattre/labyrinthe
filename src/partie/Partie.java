@@ -107,18 +107,14 @@ public class Partie {
 		        		int[] rep;
 		        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
-		        			if (elementsPartie.getJoueurs()[i].getCategorie().equals("OrdiType2")) {
-		        				JoueurOrdinateurT2 bot2 = (JoueurOrdinateurT2) elementsPartie.getJoueurs()[i];
-		        				rep[0] = Utils.genererEntier(3);
-		        				rep[1] = bot2.entreePourEmbeterJoueur(elementsPartie);
-		        				System.out.println(rep[1]);
-							}
+
 		        		}
 		        		else {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(null);
 		        		}
 		        		elementsPartie.getPieceLibre().setOrientation(IG.recupererOrientationPieceHorsPlateau());
 		        		elementsPartie.insertionPieceLibre(rep[1]);
+		        		IG.deselectionnerFleche();
 	        		//Remodifie la position des elements post-insertion
 		        		for(int n=0;n<elementsPartie.getNombreJoueurs();n++) {
 			        		IG.placerJoueurSurPlateau(n, elementsPartie.getJoueurs()[n].getPosLigne(), elementsPartie.getJoueurs()[n].getPosColonne());
@@ -163,7 +159,7 @@ public class Partie {
 		            		}
 		            		cheminPris = elementsPartie.getPlateau().calculeChemin(elementsPartie.getJoueurs()[i].getPosLigne(), elementsPartie.getJoueurs()[i].getPosColonne(), posJoueur[0], posJoueur[1]);
 		            	}while(cheminPris == null);
-	            	
+		            	IG.deselectionnerPiecePlateau();
 	            	//Marque le chemin pris par le Joueur.
 		            	cheminPrisFinal =  elementsPartie.getPlateau().calculeCheminDetaille(cheminPris, i);
 		            	for(int n = 0; n < cheminPrisFinal.length; n++) {

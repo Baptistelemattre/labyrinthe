@@ -35,10 +35,11 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         return "OrdiType2";
     }
 
-    public int entreePourEmbeterJoueur(ElementsPartie elementsPartie){
+    public int[] choisirOrientationEntree(ElementsPartie elementsPartie){
         // recuperation des éléments
+    	int[] result = new int[2];
+    	result[0] = Utils.genererEntier(3);
         Joueur[] joueurs = elementsPartie.getJoueurs();
-        Plateau plateau = elementsPartie.getPlateau();
         // on prend un joueur par défaut et on récupère sa distance avec son objet
         Joueur joueurTmp = joueurs[0];
         if (joueurTmp.equals(this)) joueurTmp = joueurs[1];
@@ -53,8 +54,12 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         System.out.println("coucou");
         // verifier s'il est plus proche par les colonnes ou par les lignes et retourne ce qui devrait déranger le plus un joueur
         if (joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne()< joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne()){
-            return joueurTmp.getPosLigne();
-        }else return joueurTmp.getPosColonne()+7;
+            result[1] = joueurTmp.getPosLigne();
+        }else{
+        	result[1] = joueurTmp.getPosColonne()+7;
+        	
+        }
+        return result;
     }
     
     @Override

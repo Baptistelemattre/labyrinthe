@@ -1,5 +1,7 @@
 package joueurs;
 
+import java.util.ArrayList;
+
 import composants.Objet;
 import composants.Plateau;
 import composants.Utils;
@@ -77,12 +79,12 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         					result[1] = j;
         					diffL = calcDiffL;
         					diffC = calcDiffC;
-        				}
-    					
+        				}	
     				}
     			}
     		}
     	}
+
     	return result;
     }
 
@@ -133,7 +135,7 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
             			//Verifie si il y a un chemin entre le joueur et une case. Et verifie si elle a un nombre de sortie egale � 1 / est une impasse.
             			if(cheminTmp != null){
             				//Verification si le joueur est sur une ligne et une colonne differente de l'objet.
-            				if(u != copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau() && n != copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()) {
+            				if(n != copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau() && u != copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()) {
                 				//Calcul la valeur absolue de la diff�rence entre le position de l'objet et celle du joueur.
                 				int calcDiffL = Math.abs(copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau()-cheminTmp[cheminTmp.length-1][0]); 
                 				int calcDiffC = Math.abs(copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()-cheminTmp[cheminTmp.length-1][1]);
@@ -143,9 +145,10 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
                 					diffC = calcDiffC;
                 					result[1] = i;
                 					result[0] = j;
+                					
                 				}
             				}
-            				else if (u == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau() && n == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()) {
+            				else if (n == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau() && u == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()) {
             					result[1] = i;
             					result[0] = j;
             					return result;
