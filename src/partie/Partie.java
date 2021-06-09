@@ -99,11 +99,14 @@ public class Partie {
                             "modifier la rotation"
                     };
 	        		IG.afficherMessage(messageInit);
+					IG.changerObjetSelectionne(elementsPartie.getJoueurs()[i].getProchainObjet().getNumeroObjet());
+					IG.changerJoueurSelectionne(i);
 	        		IG.miseAJourAffichage();
 	        		
 	        		//Demande au joueurs, de modifier l'orientation et de donner une entr�e
 		        		int[] rep;
 		        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
+		        			IG.pause(500);
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
 		        			if (elementsPartie.getJoueurs()[i].getCategorie().equals("OrdiType2")) {
 		        				JoueurOrdinateurT2 bot2 = (JoueurOrdinateurT2) elementsPartie.getJoueurs()[i];
@@ -117,7 +120,6 @@ public class Partie {
 		        		}
 		        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
 		        		elementsPartie.insertionPieceLibre(rep[1]);
-	        		
 	        		//Remodifie la position des elements post-insertion
 		        		for(int n=0;n<elementsPartie.getNombreJoueurs();n++) {
 			        		IG.placerJoueurSurPlateau(n, elementsPartie.getJoueurs()[n].getPosLigne(), elementsPartie.getJoueurs()[n].getPosColonne());

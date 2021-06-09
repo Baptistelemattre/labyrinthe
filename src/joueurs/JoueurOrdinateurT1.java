@@ -50,13 +50,15 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     	int diffL = 48;
     	int diffC = 48;
     	int[] result = new int[2];
+    	result[0] = this.getPosLigne();
+    	result[1] = this.getPosColonne();
     	Plateau plateau =  elementsPartie.getPlateau();
     	// Parcours du tableau a la recherche du chemin rapprochant le plus le joueur au premiere objet. 
     	for(int i = 0; i < 7; i++ ){
     		for(int j = 0; j < 7; j++) {
     			int[][] chemin = plateau.calculeChemin(this.getPosLigne(), this.getPosColonne(), i, j);
     			//Verification si le joueur possede un chemin vers l'objet.
-    			if(chemin != null && i == this.getProchainObjet().getPosLignePlateau() && i == this.getProchainObjet().getPosColonnePlateau()) {
+    			if(chemin != null && i == this.getProchainObjet().getPosLignePlateau() && j == this.getProchainObjet().getPosColonnePlateau()) {
     				result[0] = i;
     				result[1] = j;
     				return result;
@@ -69,7 +71,7 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-chemin[chemin.length-1][0]); 
         				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-chemin[chemin.length-1][1]);
         				//Verification si le chemin actuellement en calcul est le plus proche qui mene a l'objet rechercher.
-        				if(calcDiffL < diffL && calcDiffC < diffC) {
+						if(calcDiffL + calcDiffC < diffL + diffC) {
         					result[0] = i;
         					result[1] = j;
         					diffL = calcDiffL;
@@ -95,20 +97,20 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         if(chemin != null) {
         	int countFleche = 0;
         	//Verification que la piece pousser ne detruit pas le chemin pris
-        	for(int i = 0; i <= 7; i++) {
+        	for(int i = 0; i < 7; i++) {
         		for(int[] couple : chemin) {
         			//Verification si les fleches des colonnes ne sont pas dans le chemin
         			if(countFleche != couple[1]) {
-        				result[0] = countFleche;
+        				result[1] = countFleche;
         			}
         			//Verification si les fleches des lignes ne sont pas dans le chemin
         			else if (countFleche-i != couple[0]) {
-        				result[0] = countFleche-i;
+        				result[1] = countFleche-i;
         			}
         		}
         	}
         	//Une fois toutes les lignes/colonnes de fleches visiter insere une piece ou il ne brisera pas le chemin.
-			result[1] = Utils.genererEntier(3);
+			result[0] = Utils.genererEntier(3);
 			return result;
         }
         
@@ -121,10 +123,10 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     	//Verification si le joueur est plus proche sur les colonnes
     	if(Math.abs(diffPosJoueurObjet[0]) > Math.abs(diffPosJoueurObjet[1])) {
     		//Verification si l'ajout doit etre par le haut
-    		if(diffPosJoueurObjet[1] >= 0) {
+    		if(diffPosJoueurObjet[0] >= 0) {
     			for(int fleche = 0; fleche < 7;fleche++){
     				if(fleche == this.getPosColonne()) {
-        				result[0] = fleche;
+        				result[1] = fleche;
         				break;
     				}
     			}		
@@ -133,7 +135,7 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     		else {
     			for(int fleche = 0; fleche < 7;fleche++){
     				if(20-fleche == this.getPosColonne()) {
-        				result[0] = 20-fleche;
+        				result[1] = 20-fleche;
         				break;
     				}
     			}	
@@ -142,10 +144,10 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     	//Cas ou le joueur est plus proche sur la ligne
     	else if (Math.abs(diffPosJoueurObjet[0]) < Math.abs(diffPosJoueurObjet[1])){
     		//Verification si l'ajout est par la gauche
-    		if(diffPosJoueurObjet[0] >= 0) {
+    		if(diffPosJoueurObjet[1] >= 0) {
     			for(int fleche = 0; fleche < 7;fleche++){
     				if(fleche-7 == this.getPosLigne()) {
-        				result[0] = fleche+7;
+        				result[1] = fleche+7;
         				break;
     				}
     			}		
@@ -154,13 +156,52 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     		else {
     			for(int fleche = 0; fleche < 7;fleche++){
     				if(27-fleche == this.getPosLigne()) {
-        				result[0] = 27-fleche;
+        				result[1] = 27-fleche;
         				break;
     				}
     			}	
     		}
     	}
-		result[1] = Utils.genererEntier(3);
+    	else {
+    		//Verification si l'ajout doit etre par le haut
+    		if(diffPosJoueurObjet[1] >= 0) {
+    			for(int fleche = 0; fleche < 7;fleche++){
+    				if(fleche == this.getPosColonne()) {
+        				result[1] = fleche;
+        				break;
+    				}
+    			}		
+    		}
+    		// Si l'ajout est vers le bas
+    		else if (diffPosJoueurObjet[1] < 0){
+    			for(int fleche = 0; fleche < 7;fleche++){
+    				if(20-fleche == this.getPosColonne()) {
+        				result[1] = 20-fleche;
+        				break;
+    				}
+    			}	
+    		}
+    		//Verification si l'ajout est par la gauche
+    		else if(diffPosJoueurObjet[0] >= 0) {
+    			for(int fleche = 0; fleche < 7;fleche++){
+    				if(fleche-7 == this.getPosLigne()) {
+        				result[1] = fleche+7;
+        				break;
+    				}
+    			}		
+    		}
+    		//Verification si l'ajout est par la droite
+    		else {
+    			for(int fleche = 0; fleche < 7;fleche++){
+    				if(27-fleche == this.getPosLigne()) {
+        				result[1] = 27-fleche;
+        				break;
+    				}
+    			}	
+    		}
+    	}
+
+		result[0] = Utils.genererEntier(3);
 		return result;
     	
 
