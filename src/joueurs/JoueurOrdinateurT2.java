@@ -56,43 +56,47 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
             return joueurTmp.getPosLigne();
         }else return joueurTmp.getPosColonne()+7;
     }
+    
+    @Override
     public int[] choisirCaseArrivee(ElementsPartie elementsPartie) {
+    	
     	int diffL = 48;
     	int diffC = 48;
     	int[] result = new int[2];
+    	result[0] = this.getPosLigne();
+    	result[1] = this.getPosColonne();
     	Plateau plateau =  elementsPartie.getPlateau();
-    	// Parcours du tableau a la recherche du chemin rapprochant le plus le joueur au premiere objet.
+    	// Parcours du plateau a la recherche du chemin rapprochant le plus le joueur au premiere objet. 
     	for(int i = 0; i < 7; i++ ){
     		for(int j = 0; j < 7; j++) {
     			int[][] chemin = plateau.calculeChemin(this.getPosLigne(), this.getPosColonne(), i, j);
     			//Verification si le joueur possede un chemin vers l'objet.
-    			if(chemin != null && i == this.getProchainObjet().getPosLignePlateau() && i == this.getProchainObjet().getPosColonnePlateau()) {
+    			if(chemin != null && i == this.getProchainObjet().getPosLignePlateau() && j == this.getProchainObjet().getPosColonnePlateau()) {
     				result[0] = i;
     				result[1] = j;
     				return result;
     			}
     			//Verifie si il y a un chemin entre le joueur et une case. Et verifie si elle a un nombre de sortie egale � 1 / est une impasse.
-    			else if(chemin != null ){
-    				//Verification si l colonne differente de l'objet.
+    			else if(chemin != null){
+    				//Verification si le joueur est sur une ligne et une colonne differente de l'objet.
     				if(i != this.getProchainObjet().getPosLignePlateau() && j != this.getProchainObjet().getPosColonnePlateau()) {
         				//Calcul la valeur absolue de la diff�rence entre le position de l'objet et celle du joueur.
-        				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-chemin[chemin.length-1][0]);
-        				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-chemin[chemin.length-1][1]);
+        				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-i); 
+        				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-j);
         				//Verification si le chemin actuellement en calcul est le plus proche qui mene a l'objet rechercher.
-        				if(calcDiffL < diffL && calcDiffC < diffC) {
+						if(calcDiffL + calcDiffC < diffL + diffC) {
         					result[0] = i;
         					result[1] = j;
         					diffL = calcDiffL;
         					diffC = calcDiffC;
         				}
-
+    					
     				}
     			}
     		}
     	}
     	return result;
     }
-
     @Override
     public Joueur copy(Objet objets[]){
         Joueur nouveauJoueur=new JoueurOrdinateurT2(getNumJoueur(),getNomJoueur(), getNumeroImagePersonnage(),getPosLigne(),getPosColonne());
