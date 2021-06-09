@@ -1,9 +1,7 @@
 package joueurs;
 
 import composants.Objet;
-import composants.Piece;
 import composants.Plateau;
-import composants.Utils;
 import partie.ElementsPartie;
 
 /**
@@ -30,7 +28,7 @@ public class JoueurOrdinateurT3 extends JoueurOrdinateur {
         super(numJoueur,nomJoueur, numeroImagePersonnage,posLignePlateau,posColonnePlateau);
     }
 
-    @Override
+        @Override
     public String getCategorie() {
         return "OrdiType3";
     }

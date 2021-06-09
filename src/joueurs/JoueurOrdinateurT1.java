@@ -36,7 +36,6 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         return "OrdiType1";
     }
 
-
     @Override
     public Joueur copy(Objet objets[]){
         Joueur nouveauJoueur=new JoueurOrdinateurT1(getNumJoueur(),getNomJoueur(), getNumeroImagePersonnage(),getPosLigne(),getPosColonne());
@@ -62,11 +61,11 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     				result[1] = j;
     				return result;
     			}
-    			//Verifie si il y a un chemin entre le joueur et une case. Et verifie si elle a un nombre de sortie egale à 1 / est une impasse.
+    			//Verifie si il y a un chemin entre le joueur et une case. Et verifie si elle a un nombre de sortie egale ï¿½ 1 / est une impasse.
     			else if(chemin != null && plateau.nbPassagePossiblePiece(i, j) == 1){
     				//Verification si le joueur est sur une ligne et une colonne differente de l'objet.
     				if(i != this.getProchainObjet().getPosLignePlateau() && j != this.getProchainObjet().getPosColonnePlateau()) {
-        				//Calcul la valeur absolue de la différence entre le position de l'objet et celle du joueur.
+        				//Calcul la valeur absolue de la diffï¿½rence entre le position de l'objet et celle du joueur.
         				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-chemin[chemin.length-1][0]); 
         				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-chemin[chemin.length-1][1]);
         				//Verification si le chemin actuellement en calcul est le plus proche qui mene a l'objet rechercher.

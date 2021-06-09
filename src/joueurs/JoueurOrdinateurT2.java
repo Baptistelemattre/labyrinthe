@@ -35,6 +35,24 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         return "OrdiType2";
     }
 
+    public int entreePourEmbeterJoueur(ElementsPartie elementsPartie){
+        // recuperation des éléments
+        Joueur[] joueurs = elementsPartie.getJoueurs();
+        Plateau plateau = elementsPartie.getPlateau();
+        // on prend un joueur par défaut et on récupère sa distance avec son objet
+        Joueur joueurTmp = joueurs[0];
+        if (joueurTmp.equals(this)) joueurTmp = joueurs[1];
+        double distanceTmp = joueurTmp.distanceAvecSonObjet();
+        // compare avec les autres joueurs qui est le plus proche et on retourne ce joueur (methode joueur.distanceAvecSonObjet crée spécialement pour être utilisé ici
+        for (Joueur i:joueurs ) {
+            if (!(i.equals(this)) && distanceTmp > i.distanceAvecSonObjet()) {
+                distanceTmp = i.distanceAvecSonObjet();
+                joueurTmp = i;
+            }
+        }
+        return 0;
+    }
+
 
     @Override
     public Joueur copy(Objet objets[]){

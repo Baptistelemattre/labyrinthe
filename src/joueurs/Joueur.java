@@ -271,7 +271,9 @@ public abstract class Joueur {
 					resultat[i]=objets[j];
 		return resultat;
 	}
-	
+	public double distanceAvecSonObjet(){
+		return Math.sqrt((this.getProchainObjet().getPosColonnePlateau()- this.getPosColonne())^2+(this.getProchainObjet().getPosLignePlateau()- this.getPosLigne())^2);
+	}
 	/**
 	 * Méthode retournant une copie du joueur.
 	 * @param objets Les objets du jeu.
