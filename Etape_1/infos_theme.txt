@@ -1,3 +1,0 @@
-Théme: Donjon
-Noms, prenom: B.Lemattre, B.Fardoux, V.Sin, H.Herfani
-{"pierre", "dent_pierre","épée_cassé","cristal","livre_vert","livre_rouge","livre_jaune","potion_violet","potion_rouge","potion_vert","bague_bleu","bague_violet","bague_rouge","gant","arc","trydent", "piere_lave","piere_eau","colier_donut"}
