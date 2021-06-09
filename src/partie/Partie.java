@@ -104,13 +104,13 @@ import joueurs.JoueurOrdinateur;
 	        		//Demande au joueurs, de modifier l'orientation et de donner une entr�e
 		        		int[] rep;
 		        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
-		        			IG.pause(500);
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
 		        		}
 		        		else {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(null);
 		        		}
-		        		IG.changerPieceHorsPlateau(elementsPartie.getPieceLibre().getModelePiece(), rep[0]);
+		        		
+		        		elementsPartie.getPieceLibre().setOrientation(IG.recupererOrientationPieceHorsPlateau());
 		        		elementsPartie.insertionPieceLibre(rep[1]);
 	        		//Remodifie la position des elements post-insertion
 		        		for(int n=0;n<elementsPartie.getNombreJoueurs();n++) {
