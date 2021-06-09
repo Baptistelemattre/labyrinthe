@@ -36,7 +36,6 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         return "OrdiType1";
     }
 
-
     @Override
     public Joueur copy(Objet objets[]){
         Joueur nouveauJoueur=new JoueurOrdinateurT1(getNumJoueur(),getNomJoueur(), getNumeroImagePersonnage(),getPosLigne(),getPosColonne());

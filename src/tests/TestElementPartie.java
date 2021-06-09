@@ -3,9 +3,6 @@ package tests;
 
 import joueurs.Joueur;
 import partie.ElementsPartie;
-import composants.Objet;
-import composants.Piece;
-import composants.Plateau;
 import grafix.interfaceGraphique.IG;
 
 
