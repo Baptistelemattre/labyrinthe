@@ -35,6 +35,8 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         return "OrdiType2";
     }
 
+    //Benoit Fardoux 09/06/2021 FINI
+    //Methode permettant au joueur d'inserer une piece a l'endroit qui generait le joueur etant le plus proche de son prochain objet
     public int[] choisirOrientationEntree(ElementsPartie elementsPartie){
         // recuperation des éléments
     	int[] result = new int[2];
@@ -62,6 +64,9 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         return result;
     }
     
+
+    //Victor Sin 09/06/2021 FINI
+    //Méthode permettant au joueur de chercher le chemin menant vers la case la plus proche en terme de distance du prochain objet.
     @Override
     public int[] choisirCaseArrivee(ElementsPartie elementsPartie) {
     	

@@ -47,6 +47,8 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         return nouveauJoueur;
     }
     
+	//Victor Sin 09/06/2021 FINI
+    //Méthode permettant au joueur de chercher le chemin menant vers la case la plus proche en terme de distance du prochain objet.
     @Override
     public int[] choisirCaseArrivee(ElementsPartie elementsPartie) {
     	
@@ -88,7 +90,8 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     	return result;
     }
 
-    
+    //Victor Sin 09/06/2021 FINI
+    //Méthode permettant au joueur d'inserer une piece a l'endroit qui lui cree le chemin vers la case la plus proche du prochain objet
     @Override
     public int[] choisirOrientationEntree(ElementsPartie elementsPartie) {
     	int[] result = new int[2];
@@ -119,7 +122,7 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
         
     	int diffL = 48;
     	int diffC = 48;
-        for (int i=0; i<=27;i++){ // test toutes les entr�es du plateau
+        for (int i=0; i<=27;i++){ // test toutes les entr�es du plateau
             for (int j=0; j<4; j++){ // test toutes les orientation de la piece hors plateau
 
                 // copie des elements de la partie pour simuler une insertion
