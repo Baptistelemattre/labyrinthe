@@ -43,16 +43,55 @@ public class JoueurOrdinateurT2 extends JoueurOrdinateur {
         Joueur joueurTmp = joueurs[0];
         if (joueurTmp.equals(this)) joueurTmp = joueurs[1];
         double distanceTmp = joueurTmp.distanceAvecSonObjet();
-        // compare avec les autres joueurs qui est le plus proche et on retourne ce joueur (methode joueur.distanceAvecSonObjet crée spécialement pour être utilisé ici
+        // compare avec les autres joueurs qui est le plus proche (methode joueur.distanceAvecSonObjet crée spécialement pour être utilisé ici
         for (Joueur i:joueurs ) {
             if (!(i.equals(this)) && distanceTmp > i.distanceAvecSonObjet()) {
                 distanceTmp = i.distanceAvecSonObjet();
                 joueurTmp = i;
             }
         }
-        return 0;
+        System.out.println("coucou");
+        // verifier s'il est plus proche par les colonnes ou par les lignes et retourne ce qui devrait déranger le plus un joueur
+        if (joueurTmp.getProchainObjet().getPosColonnePlateau()-joueurTmp.getPosColonne()< joueurTmp.getProchainObjet().getPosLignePlateau()-joueurTmp.getPosLigne()){
+            return joueurTmp.getPosLigne();
+        }else return joueurTmp.getPosColonne()+7;
     }
+    public int[] choisirCaseArrivee(ElementsPartie elementsPartie) {
+    	int diffL = 48;
+    	int diffC = 48;
+    	int[] result = new int[2];
+    	Plateau plateau =  elementsPartie.getPlateau();
+    	// Parcours du tableau a la recherche du chemin rapprochant le plus le joueur au premiere objet.
+    	for(int i = 0; i < 7; i++ ){
+    		for(int j = 0; j < 7; j++) {
+    			int[][] chemin = plateau.calculeChemin(this.getPosLigne(), this.getPosColonne(), i, j);
+    			//Verification si le joueur possede un chemin vers l'objet.
+    			if(chemin != null && i == this.getProchainObjet().getPosLignePlateau() && i == this.getProchainObjet().getPosColonnePlateau()) {
+    				result[0] = i;
+    				result[1] = j;
+    				return result;
+    			}
+    			//Verifie si il y a un chemin entre le joueur et une case. Et verifie si elle a un nombre de sortie egale � 1 / est une impasse.
+    			else if(chemin != null ){
+    				//Verification si l colonne differente de l'objet.
+    				if(i != this.getProchainObjet().getPosLignePlateau() && j != this.getProchainObjet().getPosColonnePlateau()) {
+        				//Calcul la valeur absolue de la diff�rence entre le position de l'objet et celle du joueur.
+        				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-chemin[chemin.length-1][0]);
+        				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-chemin[chemin.length-1][1]);
+        				//Verification si le chemin actuellement en calcul est le plus proche qui mene a l'objet rechercher.
+        				if(calcDiffL < diffL && calcDiffC < diffC) {
+        					result[0] = i;
+        					result[1] = j;
+        					diffL = calcDiffL;
+        					diffC = calcDiffC;
+        				}
 
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
 
     @Override
     public Joueur copy(Objet objets[]){

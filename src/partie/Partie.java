@@ -3,11 +3,13 @@ package partie;
 import composants.Objet;
 import composants.Piece;
 import composants.Plateau;
+import composants.Utils;
 import grafix.interfaceGraphique.IG;
 import joueurs.Joueur;
 import joueurs.JoueurOrdinateur;
+import joueurs.JoueurOrdinateurT2;
 
-    public class Partie {
+public class Partie {
         static double version=0.0;
 
 
@@ -99,10 +101,16 @@ import joueurs.JoueurOrdinateur;
 	        		IG.afficherMessage(messageInit);
 	        		IG.miseAJourAffichage();
 	        		
-	        		//Demande au joueurs, de modifier l'orientation et de donner une entrée
+	        		//Demande au joueurs, de modifier l'orientation et de donner une entrï¿½e
 		        		int[] rep;
 		        		if(elementsPartie.getJoueurs()[i].getCategorie() != "Humain") {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(elementsPartie);
+		        			if (elementsPartie.getJoueurs()[i].getCategorie().equals("OrdiType2")) {
+		        				JoueurOrdinateurT2 bot2 = (JoueurOrdinateurT2) elementsPartie.getJoueurs()[i];
+		        				rep[0] = Utils.genererEntier(3);
+		        				rep[1] = bot2.entreePourEmbeterJoueur(elementsPartie);
+		        				System.out.println(rep[1]);
+							}
 		        		}
 		        		else {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(null);
@@ -165,7 +173,7 @@ import joueurs.JoueurOrdinateur;
 		            	IG.miseAJourAffichage();
 	            	
 	            	
-	            	//Detruit le chemin petit à petit
+	            	//Detruit le chemin petit ï¿½ petit
 		            	for(int x=0;x<cheminPrisFinal.length;x++) {
 		
 		            		IG.supprimerBilleSurPlateau(cheminPrisFinal[x][0], cheminPrisFinal[x][1], cheminPrisFinal[x][2], cheminPrisFinal[x][3]);
