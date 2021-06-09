@@ -47,7 +47,7 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     
     @Override
     public int[] choisirCaseArrivee(ElementsPartie elementsPartie) {
-    	/*
+    	
     	int diffL = 48;
     	int diffC = 48;
     	int[] result = new int[2];
@@ -69,8 +69,8 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     				//Verification si le joueur est sur une ligne et une colonne differente de l'objet.
     				if(i != this.getProchainObjet().getPosLignePlateau() && j != this.getProchainObjet().getPosColonnePlateau()) {
         				//Calcul la valeur absolue de la diffï¿½rence entre le position de l'objet et celle du joueur.
-        				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-chemin[chemin.length-1][0]); 
-        				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-chemin[chemin.length-1][1]);
+        				int calcDiffL = Math.abs(this.getProchainObjet().getPosLignePlateau()-i); 
+        				int calcDiffC = Math.abs(this.getProchainObjet().getPosColonnePlateau()-j);
         				//Verification si le chemin actuellement en calcul est le plus proche qui mene a l'objet rechercher.
 						if(calcDiffL + calcDiffC < diffL + diffC) {
         					result[0] = i;
@@ -84,80 +84,6 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     		}
     	}
     	return result;
-    	*/
-    	int[] resultatMethode = new int[2];
-		int[][] resultat = null;
-		Plateau plateau = elementsPartie.getPlateau();
-		Joueur[] joueurs = elementsPartie.getJoueurs();
-		resultat = plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau(),joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau());
-		if (resultat!=null){
-			resultatMethode[0]=resultat[resultat.length-1][0];
-			resultatMethode[1]=resultat[resultat.length-1][1];
-		}else{
-			if(joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau()!=0){
-				resultat=plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), 
-					joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau()-1,joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau());
-			}
-			// si il peut aller sur une ligne juste à coter il fait me déplacement
-			// ligne -1
-			if (resultat!= null){
-				resultatMethode[0]=resultat[resultat.length-1][0];
-				resultatMethode[1]=resultat[resultat.length-1][1];
-			}else{
-				// ligne +1
-				if(joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau()!=6){
-					resultat=plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), 
-					joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau()+1,joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau());
-				}
-				if (resultat!= null){
-					resultatMethode[0]=resultat[resultat.length-1][0];
-					resultatMethode[1]=resultat[resultat.length-1][1];
-				}else{
-					// Sinon si il peut aller sur une colonne à coter
-					// colonne -1
-					if(joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau()!=0){
-						resultat=plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), 
-							joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau(),joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau()-1);
-					}
-					if (resultat!= null){
-						resultatMethode[0]=resultat[resultat.length-1][0];
-						resultatMethode[1]=resultat[resultat.length-1][1];
-					}else{
-						// colonne +1
-						if(joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau()!=6){
-							resultat=plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), 
-								joueurs[getNumJoueur()].getProchainObjet().getPosLignePlateau(),joueurs[getNumJoueur()].getProchainObjet().getPosColonnePlateau()+1);
-						}
-						if (resultat!= null){
-							resultatMethode[0]=resultat[resultat.length-1][0];
-							resultatMethode[1]=resultat[resultat.length-1][1];
-						}else{
-							// Sinon prend le chemin le plus long
-							int maxi=0;
-							for (int i=0;i<7;i++){
-								for (int j=0;j<7;j++){
-									resultat = plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), i, j);
-									if (plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), i, j)!=null && resultat.length>maxi){
-										maxi=resultat.length;
-									}
-								}
-							}
-							
-							for (int i=0;i<7;i++){
-								for (int j=0;j<7;j++){
-									resultat = plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), i, j);
-									if (plateau.calculeChemin(joueurs[getNumJoueur()].getPosLigne(), joueurs[getNumJoueur()].getPosColonne(), i, j)!=null && resultat.length==maxi){
-										resultatMethode[0]=resultat[resultat.length-1][0];
-										resultatMethode[1]=resultat[resultat.length-1][1];
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return resultatMethode;
     }
 
     
@@ -170,22 +96,22 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
     	// Verifie si il existe un chemin actuelle vers l'objet
         int[][] chemin = plateau.calculeChemin(this.getPosLigne(), this.getPosColonne(), this.getProchainObjet().getPosLignePlateau(), this.getProchainObjet().getPosColonnePlateau());
         if(chemin != null) {
-        	int countFleche = 0;
         	//Verification que la piece pousser ne detruit pas le chemin pris
         	for(int i = 0; i < 7; i++) {
         		for(int[] couple : chemin) {
         			//Verification si les fleches des colonnes ne sont pas dans le chemin
-        			if(countFleche != couple[1]) {
-        				result[1] = countFleche;
+        			if(i != couple[1]) {
+        				result[1] = i;
         			}
         			//Verification si les fleches des lignes ne sont pas dans le chemin
-        			else if (countFleche-i != couple[0]) {
-        				result[1] = countFleche-i;
+        			else if (7+i != couple[0]) {
+        				result[1] = 7-i;
         			}
         		}
         	}
         	//Une fois toutes les lignes/colonnes de fleches visiter insere une piece ou il ne brisera pas le chemin.
 			result[0] = Utils.genererEntier(3);
+			System.out.println(result[1]);
 			return result;
         }
         
@@ -218,7 +144,11 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
                 					result[1] = i;
                 					result[0] = j;
                 				}
-            					
+            				}
+            				else if (u == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosLignePlateau() && n == copyElementsPartie.getJoueurs()[this.getNumJoueur()].getProchainObjet().getPosColonnePlateau()) {
+            					result[1] = i;
+            					result[0] = j;
+            					return result;
             				}
             			}
             		}
@@ -228,94 +158,6 @@ public class JoueurOrdinateurT1 extends joueurs.JoueurOrdinateur {
             }
         }
         return result;
-        /*
-        // L'ordinateur va inserer la piece a l'endroit qui le rapprochera de l'objet
-       
-        diffPosJoueurObjet[0] = this.getProchainObjet().getPosLignePlateau()-this.getPosLigne();
-        diffPosJoueurObjet[1] = this.getProchainObjet().getPosColonnePlateau()-this.getPosColonne();
-    	//Verification si le joueur est plus proche sur les colonnes
-    	if(Math.abs(diffPosJoueurObjet[0]) > Math.abs(diffPosJoueurObjet[1])) {
-    		//Verification si l'ajout doit etre par le haut
-    		if(diffPosJoueurObjet[0] >= 0) {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(fleche == this.getPosColonne()) {
-        				result[1] = fleche;
-        				break;
-    				}
-    			}		
-    		}
-    		// Si l'ajout est vers le bas
-    		else {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(20-fleche == this.getPosColonne()) {
-        				result[1] = 20-fleche;
-        				break;
-    				}
-    			}	
-    		}
-    	}
-    	//Cas ou le joueur est plus proche sur la ligne
-    	else if (Math.abs(diffPosJoueurObjet[0]) < Math.abs(diffPosJoueurObjet[1])){
-    		//Verification si l'ajout est par la gauche
-    		if(diffPosJoueurObjet[1] >= 0) {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(fleche-7 == this.getPosLigne()) {
-        				result[1] = fleche+7;
-        				break;
-    				}
-    			}		
-    		}
-    		//Verification si l'ajout est par la droite
-    		else {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(27-fleche == this.getPosLigne()) {
-        				result[1] = 27-fleche;
-        				break;
-    				}
-    			}	
-    		}
-    	}
-    	else {
-    		//Verification si l'ajout doit etre par le haut
-    		if(diffPosJoueurObjet[1] >= 0) {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(fleche == this.getPosColonne()) {
-        				result[1] = fleche;
-        				break;
-    				}
-    			}		
-    		}
-    		// Si l'ajout est vers le bas
-    		else if (diffPosJoueurObjet[1] < 0){
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(20-fleche == this.getPosColonne()) {
-        				result[1] = 20-fleche;
-        				break;
-    				}
-    			}	
-    		}
-    		//Verification si l'ajout est par la gauche
-    		else if(diffPosJoueurObjet[0] >= 0) {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(fleche-7 == this.getPosLigne()) {
-        				result[1] = fleche+7;
-        				break;
-    				}
-    			}		
-    		}
-    		//Verification si l'ajout est par la droite
-    		else {
-    			for(int fleche = 0; fleche < 7;fleche++){
-    				if(27-fleche == this.getPosLigne()) {
-        				result[1] = 27-fleche;
-        				break;
-    				}
-    			}	
-    		}
-    	}
-
-		result[0] = Utils.genererEntier(3);
-		return result;
-    	*/
+ 
     }
 }

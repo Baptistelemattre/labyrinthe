@@ -117,7 +117,6 @@ public class Partie {
 		        		else {
 		        			rep = elementsPartie.getJoueurs()[i].choisirOrientationEntree(null);
 		        		}
-		        		
 		        		elementsPartie.getPieceLibre().setOrientation(IG.recupererOrientationPieceHorsPlateau());
 		        		elementsPartie.insertionPieceLibre(rep[1]);
 	        		//Remodifie la position des elements post-insertion
